@@ -1,0 +1,27 @@
+<aside class="sidebar bg-blue-500 text-white w-64 min-h-screen p-4">
+  <%= link_to "Budget", dashboard_budget_path, class: "text-white dark:text-black" %>
+  <h2 class="sidebar-title text-2xl mb-4">Accounts</h2>
+  <hr class="mb-4"/>
+  <ul class="sidebar-list">
+    <% current_user.accounts.each do |account| %>
+      <li class="sidebar-item mb-2">
+        <%= link_to account.name, account_transactions_path(account_id: account.id), class: "text-white" %>
+      </li>
+    <% end %>
+  </ul>
+  <%= link_to new_account_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium flex items-center" do %>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+      <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd"/>
+    </svg>
+    &nbsp;New account
+  <% end %>
+  <hr class="mt-4 mb-4"/>
+  <ul class="sidebar-list mt-4">
+    <li class="sidebar-item mb-2">
+      <%= link_to "Category Groups", category_groups_path, class: "text-white" %>
+    </li>
+    <li class="sidebar-item mb-2">
+      <%= link_to "Categories", categories_path, class: "text-white" %>
+    </li>
+  </ul>
+</aside>

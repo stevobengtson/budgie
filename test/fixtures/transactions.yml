@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  account: one
+  memo: MyString
+  cleared: false
+  amount: 1
+  entry_date: 2024-06-14 13:46:18
+
+two:
+  account: two
+  memo: MyString
+  cleared: false
+  amount: 1
+  entry_date: 2024-06-14 13:46:18

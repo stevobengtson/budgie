@@ -1,0 +1,39 @@
+<div class="w-full overflow-x-auto">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Categories" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Categories</h1>
+    <%= link_to "New category", new_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <div id="categories" class="min-w-full">
+    <table class="table-auto w-full">
+      <thead class="bg-blue-500 text-white">
+      <tr>
+        <th class="px-4 py-2">Name</th>
+        <th class="px-4 py-2">Category Group</th>
+        <th class="px-4 py-2">Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @categories.each do |category| %>
+        <tr class="<%= cycle('bg-white', 'bg-gray-100') %>">
+          <td class="border px-4 py-2"><%= category.name %></td>
+          <td class="border px-4 py-2">
+            <%= link_to category.category_group.name.humanize, category_group_path(category.category_group) %>
+          </td>
+          <td class="border px-4 py-2">
+            <%= link_to "Show", category, class: "text-blue-500 hover:text-blue-800" %>
+            <%= link_to "Edit", edit_category_path(category), class: "text-blue-500 hover:text-blue-800 ml-4" %>
+            <%= link_to "Delete", category, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:text-red-800 ml-4" %>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="flex-grow w-full overflow-x-auto">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Transactions" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl dark:text-white ">Transactions</h1>
+    <%= link_to "New transaction", new_account_transaction_path(account_id: @account.id), class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <table class="table-auto w-full">
+    <thead class="bg-blue-500 text-white">
+    <tr>
+      <th class="px-4 py-2">Account</th>
+      <th class="px-4 py-2">Memo</th>
+      <th class="px-4 py-2">Cleared</th>
+      <th class="px-4 py-2">Amount</th>
+      <th class="px-4 py-2">Entry Date</th>
+      <th class="px-4 py-2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @transactions.each do |transaction| %>
+      <tr class="<%= cycle('bg-white', 'bg-gray-100') %>">
+        <td class="border px-4 py-2"><%= transaction.account.name %></td>
+        <td class="border px-4 py-2"><%= transaction.memo %></td>
+        <td class="border px-4 py-2"><%= transaction.cleared %></td>
+        <td class="border px-4 py-2"><%= number_to_currency(transaction.amount_to_float) %></td>
+        <td class="border px-4 py-2"><%= transaction.entry_date.strftime("%b %d, %Y") %></td>
+        <td class="border px-4 py-2">
+          <%= link_to "Show", transaction, class: "text-blue-500 hover:text-blue-800" %>
+          <%= link_to "Edit", edit_transaction_path(transaction), class: "text-blue-500 hover:text-blue-800 ml-4" %>
+          <%= link_to "Delete", transaction, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:text-red-800 ml-4" %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

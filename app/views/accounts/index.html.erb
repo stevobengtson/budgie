@@ -1,0 +1,41 @@
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <% content_for :title, "Accounts" %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl dark:text-white">Accounts</h1>
+    <%= link_to "New account", new_account_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+  </div>
+
+  <div id="accounts" class="min-w-full">
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full">
+        <thead class="bg-blue-500 text-white">
+        <tr>
+          <th class="px-4 py-2">Account Name</th>
+          <th class="px-4 py-2">Balance</th>
+          <th class="px-4 py-2">Account Type</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @accounts.each do |account| %>
+          <tr class="<%= cycle('bg-white', 'bg-gray-100') %>">
+            <td class="border px-4 py-2"><%= account.name %></td>
+            <td class="border px-4 py-2"><%= account.balance %></td>
+            <td class="border px-4 py-2"><%= account.account_type.humanize.capitalize %></td>
+            <td class="border px-4 py-2">
+              <%= link_to "Show", account, class: "text-blue-500 hover:text-blue-800" %>
+              <%= link_to "Edit", edit_account_path(account), class: "text-blue-500 hover:text-blue-800 ml-4" %>
+              <%= link_to "Delete", account, method: :delete, data: { confirm: 'Are you sure?' }, class: "text-red-500 hover:text-red-800 ml-4" %>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
