@@ -1,10 +1,14 @@
-<table class="w-full min-w-max text-left whitespace-no-wrap table-auto">
-    <thead>
-        <tr>
-            {{$header}}
-        </tr>
-    </thead>
-    <tbody>
-        {{$slot}}
-    </tbody>
+@props(['columns', 'records'])
+
+<table {{ $attributes->merge(['id' => 'table','class' => 'table-auto w-full']) }}>
+
+    @if(isset($columns))
+        <x-table.thead :columns="$columns"/>
+        @if(isset($records))
+            <x-table.tbody :columns="$columns" :records="$records"/>
+        @endif
+    @endif
+
+    {{ $slot }}
+
 </table>

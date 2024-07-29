@@ -9,23 +9,71 @@ use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): View|Factory|Application
+    public function index(Request $request): View|Factory|Application
     {
         /** @var User $user */
         $user = auth()->user();
-        if (! $user) {
+        if (!$user) {
             abort(403, 'Unauthorized');
         }
 
-        $accounts = $user->accounts()->paginate();
+        $accounts = $user
+            ->accounts()
+            ->when($request->has('sort_field'), function ($query) use ($request) {
+                $sortField = $request->input('sort_field', 'name');
+                $sortDir = $request->input('sort_dir', 'asc');
+                $query->orderBy($sortField, $sortDir);
+            })
+            ->paginate($request->input('per_page', 10));
 
-        return view('accounts.index', ['accounts' => $accounts]);
+        $columns = [
+            'name' => [
+                'label' => 'Name',
+                'sortable' => true,
+            ],
+            'type' => [
+                'label' => 'Type',
+                'sortable' => true,
+            ],
+            'currency' => [
+                'label' => 'Currency',
+                'sortable' => false,
+            ],
+            'balance' => [
+                'label' => 'Balance',
+                'sortable' => true,
+            ],
+            'interest' => [
+                'label' => 'Interest',
+                'sortable' => false,
+            ],
+            'opened' => [
+                'label' => 'Opened',
+                'sortable' => false,
+            ],
+            'closed' => [
+                'label' => 'Closed',
+                'sortable' => false,
+            ],
+            'actions' => [
+                'label' => 'Actions',
+                'sortable' => false,
+                'editable' => true,
+                'deletable' => true,
+            ],
+        ];
+
+        $data = compact('accounts', 'columns');
+        $view = $request->header('hx-request') ? 'accounts.partials.list' : 'accounts.index';
+
+        return view($view, $data);
     }
 
     /**

@@ -18,7 +18,7 @@ class AccountFactory extends Factory
     {
         return [
             'user_id' => 1,
-            'name' => $this->faker->name(),
+            'name' => $this->faker->name,
             'type' => $this->faker->randomElement(['checking', 'savings']),
             'currency' => 'CAD',
             'balance' => $this->faker->randomFloat(2, 0, 10000),
