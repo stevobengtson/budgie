@@ -1,0 +1,25 @@
+name: "budgie"
+
+services:
+  selenium:
+    image: selenium/standalone-chromium
+    restart: unless-stopped
+
+  redis:
+    image: redis:7.2
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+
+  postgres:
+    image: postgres:16.1
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+volumes:
+  redis-data:
+  postgres-data:
