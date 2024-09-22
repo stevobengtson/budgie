@@ -1,0 +1,36 @@
+<li>
+  <div class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+    <button type="button" class="flex items-center" aria-controls="dropdown-accounts" data-collapse-toggle="dropdown-accounts">
+      <i class="fa-solid fa-chevron-down w-3 h-3 transition-transform" aria-hidden="true"></i>
+    </button>
+    <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Accounts</span>
+  </div>
+  <ul id="dropdown-accounts" class="py-2 space-y-2 pl-8">
+    <%= link_to "All Transactions", transactions_path, class: "flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700", data: { turbo_frame: "_top" } %>
+    <% @user.accounts.first(10).each do |account| %>
+      <li>
+        <%= link_to account.name, account_transactions_path(account), class: "flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700", data: { turbo_frame: "_top" } %>
+      </li>
+    <% end %>
+  </ul>
+</li>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const button = document.querySelector('[data-collapse-toggle="dropdown-accounts"]');
+    const dropdown = document.getElementById('dropdown-accounts');
+    const arrow = button.querySelector('i');
+
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+      dropdown.classList.toggle('hidden');
+      arrow.classList.toggle('fa-rotate-270');
+    });
+
+    dropdown.addEventListener('click', function(event) {
+      if (event.target.tagName === 'A') {
+        event.stopPropagation();
+      }
+    });
+  });
+</script>

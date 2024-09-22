@@ -34,8 +34,7 @@ p "Created user: #{User.first.email}"
     name: Faker::Company.name,
     description: Faker::Company.catch_phrase,
     atype: %w[Checking Savings Credit].sample,
-    currency: %w[USD EUR GBP].sample,
-    balance: Faker::Number.decimal(l_digits: 5),
+    balance_cents: Faker::Number.number(digits: 6),
     interest_rate: Faker::Number.decimal(l_digits: 2),
     opened_at: Faker::Date.between(from: 1.year.ago, to: Date.today),
   )
@@ -48,7 +47,7 @@ p "Created #{Account.count} accounts"
     account: Account.all.sample,
     memo: Faker::Company.catch_phrase,
     cleared: [ true, false ].sample,
-    amount: Faker::Number.decimal(l_digits: 5),
+    amount_cents: Faker::Number.number(digits: 6),
     entry_date: Faker::Date.between(from: 1.year.ago, to: Date.today),
   )
 end

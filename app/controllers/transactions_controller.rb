@@ -1,9 +1,24 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: %i[ show edit update destroy ]
-
+  before_action :set_account, only: %i[ account_summary ]
+  before_action :default_sort, only: %i[ index account_summary ]
+  
   # GET /transactions or /transactions.json
   def index
-    @transactions = Transaction.all
+    @pagy, @transactions = pagy(current_user.transactions.order("#{params[:sort]} #{params[:direction]}"), items: 25)
+    respond_to do |format|
+      format.html { render 'index' }
+      format.turbo_stream { render 'index' }
+    end
+  end
+  
+  # GET /accounts/:account_id/transactions
+  def account_summary
+    @pagy, @transactions = pagy(@account.transactions.order("#{params[:sort]} #{params[:direction]}"), items: 25)
+    respond_to do |format|
+      format.html { render 'index' }
+      format.turbo_stream { render 'index' }
+    end
   end
 
   # GET /transactions/1 or /transactions/1.json
@@ -61,6 +76,17 @@ class TransactionsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_transaction
       @transaction = Transaction.find(params[:id])
+    end
+
+    def set_account
+      @account = Account.find(params[:account_id])
+    end
+
+    def default_sort
+      if params[:sort].blank?
+        params[:sort] = "entry_date"
+        params[:direction] = "desc"
+      end
     end
 
     # Only allow a list of trusted parameters through.

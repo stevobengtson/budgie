@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :transactions
-  resources :accounts
+  resources :transactions do
+    collection do
+      get '/', to: 'transactions#index'
+    end
+  end
+  resources :accounts do
+    resources :transactions, only: [:account_summary] do
+      collection do
+        get '/', to: 'transactions#account_summary'
+      end
+    end
+  end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

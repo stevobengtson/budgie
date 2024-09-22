@@ -1,0 +1,24 @@
+#!/bin/bash
+
+case $1 in
+start)
+  echo "Starting development server"
+  devcontainer up --mount "type=bind,source=$HOME/.config/nvim,target=/home/vscode/.config/nvim" --mount "type=bind,source=$HOME/.tmux,target=/home/vscode/.tmux" --mount "type=bind,source=$HOME/.tmux.conf,target=/home/vscode/.tmux.conf" --workspace-folder .
+  ;;
+build)
+  echo "Building development server"
+  devcontainer build --workspace-folder .
+  ;;
+exec)
+  shift
+  devcontainer exec --workspace-folder . "$@"
+  ;;
+ide)
+  echo "Staring IDE"
+  devcontainer exec --workspace-folder . tmux new-session -s ide_session 'nvim .'
+  ;;
+stop)
+  echo "Stopping development server"
+  docker compose -f .devcontainer/compose.yaml down
+  ;;
+esac

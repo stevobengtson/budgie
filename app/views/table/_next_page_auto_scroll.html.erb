@@ -1,0 +1,6 @@
+<% if @pagy.present? and @pagy.next.present? %>
+  <%= turbo_frame_tag :pagination, loading: :lazy, src: url_for(request.params.merge(format: :turbo_stream, page: @pagy.next)) do %>
+    <span class="w-full text-center text-blue-500 text-6xl">Loading more...</span>
+  <% end %>
+<% end %>
+

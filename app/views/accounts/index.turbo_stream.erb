@@ -1,10 +1,4 @@
 <%= turbo_stream.append :accounts do %>
     <%= render @accounts %>
+    <%= render "table/next_page_auto_scroll" %>
 <% end %>
-
-<%= turbo_stream.append :accounts do %>
-    <% if @pagy.next.present? %>
-        <%= turbo_frame_tag :pagination, loading: :lazy, src: accounts_path(format: :turbo_stream, page: @pagy.next) %>
-    <% end %>
-<% end %>
-    

@@ -6,4 +6,5 @@ class User < ApplicationRecord
          :confirmable, :lockable, :trackable
 
   has_many :accounts, dependent: :destroy
+  has_many :transactions, through: :accounts
 end

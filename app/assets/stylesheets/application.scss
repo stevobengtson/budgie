@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+@import "font-awesome";
 
 .pointer.active.desc:after {
     content: "▲";
@@ -20,4 +21,8 @@
 
 .pointer.active.asc:after {
     content: "▼";
+}
+
+.hidden {
+    display: none;
 }

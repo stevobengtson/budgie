@@ -6,7 +6,7 @@ class CreateAccounts < ActiveRecord::Migration[7.2]
       t.text :description
       t.string :atype
       t.string :currency
-      t.decimal :balance, precision: 10, scale: 2
+      t.monetize :balance
       t.decimal :interest_rate, precision: 5, scale: 2
       t.timestamp :opened_at
       t.timestamp :closed_at, null: true

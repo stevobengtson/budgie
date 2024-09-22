@@ -1,0 +1,7 @@
+<thead>
+    <tr>
+        <% @columns.each do |column| %>
+            <%= render TableHeaderComponent.new(title: column[:title], sortable: column[:sortable], column: column[:column]) %>
+        <% end %>
+    </tr>
+</thead>

@@ -2,7 +2,7 @@
   <% content_for :title, "Accounts" %>
 
   <div class="flex justify-between items-center">
-    <h1 class="font-bold text-4xl">Accounts</h1>
+    <h1 class="font-bold text-4xl dark:text-white">Accounts</h1>
     <%= link_to "New account", new_account_path, class: "rounded-lg py-3 px-5 bg-blue-500 hover:bg-blue-700 text-white block font-medium" %>
   </div>
 
@@ -12,27 +12,19 @@
         <div class="relative rounded-xl overflow-auto">
           <div class="shadow-sm overflow-hidden my-8">      
             <table class="table-auto w-full text-sm">
-              <thead>
-                <tr>
-                  <th class="border-b dark:border-slate-600 font-bold p-4 pl-8 pt-0 pb-3 text-slate-500 dark:text-slate-200 text-left">Id</th>
-                  <th class="border-b dark:border-slate-600 font-bold p-4 pl-8 pt-0 pb-3 text-slate-500 dark:text-slate-200 text-left">
-                    <%= sortable "name" %>
-                    <%= sort_indicator if params[:sort] == "name" %>
-                  </th>
-                  <th class="border-b dark:border-slate-600 font-bold p-4 pl-8 pt-0 pb-3 text-slate-500 dark:text-slate-200 text-left">
-                    <%= sortable "atype", "Type" %>
-                    <%= sort_indicator if params[:sort] == "atype" %>
-                  </th>
-                  <th class="border-b dark:border-slate-600 font-bold p-4 pl-8 pt-0 pb-3 text-slate-500 dark:text-slate-200 text-left">Balance</th>
-                  <th class="border-b dark:border-slate-600 font-bold p-4 pl-8 pt-0 pb-3 text-slate-500 dark:text-slate-200 text-left">Interest Rate</th>
-                  <th class="border-b dark:border-slate-600 font-bold p-4 pl-8 pt-0 pb-3 text-slate-500 dark:text-slate-200 text-left">Actions</th>
-                </tr>
-              </thead>
+              <%= render TableHeadComponent.new(columns: [
+                { :title => "Id" },
+                { :title => "Name", :sortable => true, :column => "name" },
+                { :title => "Type", :sortable => true, :column => "atype" },
+                { :title => "Balance" },
+                { :title => "Interest Rate" },
+                { :title => "Actions" }
+              ]) %>
               <tbody id="accounts" class="bg-white dark:bg-slate-800">
                 <%= render @accounts %>
+                <%= render "table/next_page_auto_scroll" %>
               </tbody>
             </table>
-            <%= turbo_frame_tag :pagination, loading: :lazy, src: accounts_path(format: :turbo_stream) %>
           </div>
         </div>
       </div>

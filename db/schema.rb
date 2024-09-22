@@ -20,7 +20,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_025029) do
     t.text "description"
     t.string "atype"
     t.string "currency"
-    t.decimal "balance", precision: 10, scale: 2
+    t.integer "balance_cents", default: 0, null: false
+    t.string "balance_currency", default: "CAD", null: false
     t.decimal "interest_rate", precision: 5, scale: 2
     t.datetime "opened_at", precision: nil
     t.datetime "closed_at", precision: nil
@@ -33,7 +34,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_025029) do
     t.bigint "account_id", null: false
     t.string "memo"
     t.boolean "cleared"
-    t.integer "amount"
+    t.integer "amount_cents", default: 0, null: false
+    t.string "amount_currency", default: "CAD", null: false
     t.datetime "entry_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

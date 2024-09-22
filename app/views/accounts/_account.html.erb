@@ -1,11 +1,11 @@
 <tr id="<%= dom_id account %>">
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"><%= account.id %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"><%= account.name %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"><%= account.atype %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"><%= number_to_currency(account.balance) %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"><%= account.interest_rate %> %</td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-    <%= link_to "Edit", edit_account_path(account), class: "rounded-lg py-3 px-5 bg-orange-100 hover:bg-orange-300 inline-block font-medium" %>
-    <%= link_to "Delete", account, method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-red-100 hover:bg-red-300 inline-block font-medium" %>
+  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= account.id %></td>
+  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= account.name %></td>
+  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= account.atype %></td>
+  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= number_to_currency(account.balance) %></td>
+  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= account.interest_rate %> %</td>
+  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white">
+    <%= link_to "Edit", edit_account_path(account), class: "rounded-lg py-3 px-5 bg-orange-100 hover:bg-orange-500 hover:text-white inline-block font-medium" %>
+    <%= link_to "Delete", account, method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-red-100 hover:bg-red-500 hover:text-white inline-block font-medium" %>
   </td>
 </tr>
