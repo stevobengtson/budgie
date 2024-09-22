@@ -1,10 +1,11 @@
-<tr id="<%= dom_id transaction %>">
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= transaction.entry_date %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= humanized_money_with_symbol(transaction.amount) %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= transaction.memo %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= transaction.cleared %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white">
+<%= turbo_frame_tag transaction do %>
+<g-tr id="<%= dom_id(transaction) %>">
+  <g-td><%= transaction.entry_date.strftime("%F") %></g-td>
+  <g-td><%= humanized_money_with_symbol(transaction.amount) %></g-td>
+  <g-td><%= transaction.memo %></g-td>
+  <g-td>
     <%= link_to "Edit", edit_transaction_path(transaction), class: "rounded-lg py-3 px-5 bg-orange-100 hover:bg-orange-500 hover:text-white inline-block font-medium" %>
     <%= link_to "Delete", transaction, method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-red-100 hover:bg-red-500 hover:text-white inline-block font-medium" %>
-  </td>
-</tr>
+  </g-td>
+</g-tr>
+<% end %>

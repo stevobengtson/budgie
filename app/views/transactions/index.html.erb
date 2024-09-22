@@ -1,41 +1,44 @@
 <div class="px-4 sm:px-6 lg:px-8">
   <div class="sm:flex sm:items-center">
     <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold leading-6 text-gray-900">Transactions</h1>
+      <h1 class="text-base font-semibold leading-6 text-gray-900">transactions</h1>
       <% if @account.present? %>
-        <p class="mt-2 text-sm text-gray-700">Showing transactions for <%= @account.name %>.</p>
+        <p class="mt-2 text-sm text-gray-700">showing transactions for <%= @account.name %>.</p>
       <% else %>
-        <p class="mt-2 text-sm text-gray-700">A list of all transactions in your account.</p>
+        <p class="mt-2 text-sm text-gray-700">a list of all transactions in your account.</p>
       <% end %>
     </div>
     <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-      <%= link_to "Add transaction", new_transaction_path, class: "block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
+      <%= link_to "add transaction", new_transaction_path, class: "block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
     </div>
   </div>
   <div class="mt-8 flow-root h-full">
     <div class="h-full -mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
       <div class="inline-block min-w-full h-full">
-        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg h-full flex flex-col">
-          <table class="min-w-full divide-y divide-gray-300">
-              <%= render TableHeadComponent.new(columns: [
-                { :title => "Entry Date", :sortable => true, :column => "entry_date" },
-                { :title => "Amount", :sortable => true, :column => "amount" },
-                { :title => "Memo" },
-                { :title => "Cleared", :sortable => true, :column => "cleared" },
-                { :title => "Actions" }
+        <g-responsive>
+          <g-table style="grid-template-columns: 120px 120px 2fr 1fr;">
+            <g-thead>
+              <g-tr>
+                <g-th>Date</g-th>
+                <g-th>Amount</g-th>
+                <g-th>Memo</g-th>
+                <g-th>Actions</g-th>
+              </g-tr>
+            </g-thead>
+            <g-tbody id="transactions">
+              <%= render @transactions %>
+            </g-tbody>
+          </g-table>
+        </g-responsive>
+        <%= render "table/next_page_auto_scroll" %>
+
+              <%#= render tableheadcomponent.new(columns: [
+                { :title => "entry date", :sortable => true, :column => "entry_date" },
+                { :title => "amount", :sortable => true, :column => "amount" },
+                { :title => "cleared", :sortable => true, :column => "cleared" },
+                { :title => "actions" }
               ]) %>
-          </table>
-          <div class="overflow-auto flex-grow">
-            <table class="min-w-full divide-y divide-gray-300">
-              <tbody id="transactions" class="bg-white dark:bg-slate-800">
-                <%= render @transactions %>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </div>
-<%= render "table/next_page_auto_scroll" %>
-

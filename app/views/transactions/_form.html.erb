@@ -1,42 +1,18 @@
-<%= form_with(model: transaction, class: "contents") do |form| %>
-  <% if transaction.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
-
-      <ul>
-        <% transaction.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="my-5">
-    <%= form.label :account_id %>
-    <%= form.collection_select :account_id, current_user.accounts, :id, :name, { prompt: "Choose an account" }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :memo %>
-    <%= form.text_field :memo, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :cleared %>
-    <%= form.check_box :cleared, class: "block mt-2 h-5 w-5" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :amount %>
-    <%= form.text_field :amount, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :entry_date %>
-    <%= form.datetime_field :entry_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
+<%= turbo_frame_tag transaction do %>
+  <g-tr>
+<%= form_with model: transaction, class: "contents" do |form| %>
+    <g-td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white">
+      <%= form.date_field :entry_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </g-td>
+    <g-td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white">
+      <%= form.text_field :amount, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </g-td>
+    <g-td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white">
+      <%= form.text_field :memo, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </g-td>
+    <g-td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white">
+      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+    </g-td>
+<% end %>
+  </g-tr>
 <% end %>
