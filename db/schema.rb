@@ -10,12 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_15_025029) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
+ActiveRecord::Schema[7.2].define(version: 2024_10_20_155917) do
   create_table "accounts", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
+    t.integer "budget_id", null: false
     t.string "name"
     t.text "description"
     t.string "atype"
@@ -23,15 +21,24 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_025029) do
     t.integer "balance_cents", default: 0, null: false
     t.string "balance_currency", default: "CAD", null: false
     t.decimal "interest_rate", precision: 5, scale: 2
-    t.datetime "opened_at", precision: nil
-    t.datetime "closed_at", precision: nil
+    t.datetime "opened_at"
+    t.datetime "closed_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_accounts_on_user_id"
+    t.index [ "user_id" ], name: "index_accounts_on_user_id"
+    t.index [ "budget_id" ], name: "index_accounts_on_budget_id"
+  end
+
+  create_table "budgets", force: :cascade do |t|
+    t.string "title"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index [ "user_id" ], name: "index_budgets_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.bigint "account_id", null: false
+    t.integer "account_id", null: false
     t.string "memo"
     t.boolean "cleared"
     t.integer "amount_cents", default: 0, null: false
@@ -39,7 +46,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_025029) do
     t.datetime "entry_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["account_id"], name: "index_transactions_on_account_id"
+    t.index [ "account_id" ], name: "index_transactions_on_account_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,12 +70,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_15_025029) do
     t.datetime "locked_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+    t.index [ "confirmation_token" ], name: "index_users_on_confirmation_token", unique: true
+    t.index [ "email" ], name: "index_users_on_email", unique: true
+    t.index [ "reset_password_token" ], name: "index_users_on_reset_password_token", unique: true
+    t.index [ "unlock_token" ], name: "index_users_on_unlock_token", unique: true
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "accounts", "budgets"
+  add_foreign_key "budgets", "users"
   add_foreign_key "transactions", "accounts"
 end

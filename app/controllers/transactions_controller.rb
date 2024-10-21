@@ -1,96 +1,68 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show edit update destroy ]
-  before_action :set_account, only: %i[ account_summary ]
-  before_action :default_sort, only: %i[ index account_summary ]
-  
-  # GET /transactions or /transactions.json
-  def index
-    @pagy, @transactions = pagy(current_user.transactions.order("#{params[:sort]} #{params[:direction]}"), items: 25)
-    respond_to do |format|
-      format.html { render 'index' }
-      format.turbo_stream { render 'index' }
-    end
-  end
-  
-  # GET /accounts/:account_id/transactions
-  def account_summary
-    @pagy, @transactions = pagy(@account.transactions.order("#{params[:sort]} #{params[:direction]}"), items: 25)
-    respond_to do |format|
-      format.html { render 'index' }
-      format.turbo_stream { render 'index' }
-    end
-  end
+  before_action :set_account, only: %i[ index new create ]
+  before_action :set_transaction, only: %i[ edit update destroy ]
+  before_action :default_sort, only: %i[ index ]
 
-  # GET /transactions/1 or /transactions/1.json
-  def show
+  # GET /account/:account_id/transactions
+  def index
+    @pagy, @transactions = pagy(@account.transactions.order("#{params[:sort]} #{params[:direction]}"), items: 25)
   end
 
   # GET /transactions/new
   def new
-    @transaction = Transaction.new
+    @transaction = @account.transactions.new
   end
 
   # GET /transactions/1/edit
   def edit
   end
 
-  # POST /transactions or /transactions.json
+  # POST /transactions
   def create
-    @transaction = Transaction.new(transaction_params)
-
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
+    @transaction = @account.transactions.new(transaction_params)
+    if @transaction.save
+      redirect_to account_transactions_url(@account), notice: "Transaction was successfully created."
+    else
+      redirect_to account_transactions_url(@account), notice: "Transaction was not created."
     end
   end
 
-  # PATCH/PUT /transactions/1 or /transactions/1.json
+  # PATCH/PUT /transactions/1
   def update
-    respond_to do |format|
-      if @transaction.update(transaction_params)
-        format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }
-        format.json { render :show, status: :ok, location: @transaction }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
+    if @transaction.update(transaction_params)
+      redirect_to account_transactions_url(@transaction.account), notice: "Transaction was successfully updated."
+    else
+      redirect_to account_transactions_url(@transaction.account), notice: "Transaction was not updated."
     end
   end
 
-  # DELETE /transactions/1 or /transactions/1.json
+  # DELETE /transactions/1
   def destroy
+    account = @transaction.account
     @transaction.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to transactions_url, notice: "Transaction was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to account_transactions_url(account), notice: "Transaction was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_transaction
-      @transaction = Transaction.find(params[:id])
-    end
 
-    def set_account
-      @account = Account.find(params[:account_id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_transaction
+    @transaction = Transaction.find(params[:id])
+  end
 
-    def default_sort
-      if params[:sort].blank?
-        params[:sort] = "entry_date"
-        params[:direction] = "desc"
-      end
-    end
+  def set_account
+    @account = Account.find(params[:account_id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def transaction_params
-      params.require(:transaction).permit(:account_id, :memo, :cleared, :amount, :entry_date)
+  def default_sort
+    if params[:sort].blank?
+      params[:sort] = "entry_date"
+      params[:direction] = "desc"
     end
+  end
+
+  # Only allow a list of trusted parameters through.
+  def transaction_params
+    params.require(:transaction).permit(:memo, :cleared, :amount, :entry_date)
+  end
 end

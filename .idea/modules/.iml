@@ -37,6 +37,7 @@
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.9.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="devise (v4.9.4, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="docile (v1.4.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dotenv (v3.1.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="drb (v2.2.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.13.0, asdf: 3.3.4) [gem]" level="application" />
@@ -49,9 +50,9 @@
     <orderEntry type="library" scope="PROVIDED" name="importmap-rails (v2.0.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.7.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="irb (v1.14.0, asdf: 3.3.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="jbuilder (v2.12.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="json (v2.7.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="language_server-protocol (v3.17.0.3, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="listen (v3.9.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="logger (v1.6.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="loofah (v2.22.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.8.1, asdf: 3.3.4) [gem]" level="application" />
@@ -60,6 +61,9 @@
     <orderEntry type="library" scope="PROVIDED" name="method_source (v1.1.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.5, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.25.1, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="monetize (v1.13.0, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="money (v6.19.0, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="money-rails (v1.15.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.7.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.4.16, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, asdf: 3.3.4) [gem]" level="application" />
@@ -70,7 +74,6 @@
     <orderEntry type="library" scope="PROVIDED" name="pagy (v9.0.9, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="parallel (v1.26.3, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="parser (v3.3.5.0, asdf: 3.3.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="pg (v1.5.8, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="prism (v1.0.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="psych (v5.1.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v6.0.1, asdf: 3.3.4) [gem]" level="application" />
@@ -83,13 +86,14 @@
     <orderEntry type="library" scope="PROVIDED" name="rails (v7.2.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.2.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.6.0, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails_live_reload (v0.3.6, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v7.2.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rainbow (v3.1.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.2.1, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rb-fsevent (v0.11.2, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rb-inotify (v0.11.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rbs (v3.5.3, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rdoc (v6.7.0, asdf: 3.3.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="redis (v5.3.0, asdf: 3.3.4) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="redis-client (v0.22.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="regexp_parser (v2.9.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="reline (v0.5.10, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="responders (v3.1.1, asdf: 3.3.4) [gem]" level="application" />
@@ -106,9 +110,13 @@
     <orderEntry type="library" scope="PROVIDED" name="rubyzip (v2.3.2, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sassc (v2.4.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v4.24.0, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov (v0.22.0, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov-html (v0.13.1, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="simplecov_json_formatter (v0.1.4, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sorbet-runtime (v0.5.11572, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v4.2.1, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.5.2, asdf: 3.3.4) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="sqlite3 (v2.1.0, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="stimulus-rails (v1.3.4, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tailwindcss-rails (v2.7.4, asdf: 3.3.4) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.3.2, asdf: 3.3.4) [gem]" level="application" />

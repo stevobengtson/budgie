@@ -1,11 +1,14 @@
-<%= turbo_frame_tag transaction do %>
-<g-tr id="<%= dom_id(transaction) %>">
-  <g-td><%= transaction.entry_date.strftime("%F") %></g-td>
-  <g-td><%= humanized_money_with_symbol(transaction.amount) %></g-td>
-  <g-td><%= transaction.memo %></g-td>
-  <g-td>
-    <%= link_to "Edit", edit_transaction_path(transaction), class: "rounded-lg py-3 px-5 bg-orange-100 hover:bg-orange-500 hover:text-white inline-block font-medium" %>
-    <%= link_to "Delete", transaction, method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-red-100 hover:bg-red-500 hover:text-white inline-block font-medium" %>
-  </g-td>
-</g-tr>
-<% end %>
+<div id="<%= dom_id transaction %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Date:</strong>
+    <%= transaction.entry_date.strftime("%F") %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Amount:</strong>
+    <%= humanized_money_with_symbol(transaction.amount) %>
+  </p>
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Memo:</strong>
+    <%= transaction.memo %>
+  </p>
+</div>

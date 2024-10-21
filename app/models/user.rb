@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable
 
-  has_many :accounts, dependent: :destroy
-  has_many :transactions, through: :accounts
+  has_many :accounts, through: :budgets, dependent: :destroy
+  has_many :transactions, through: :accounts, dependent: :destroy
+  has_many :budgets, dependent: :destroy
 end

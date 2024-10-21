@@ -1,11 +1,16 @@
-<tr id="<%= dom_id account %>">
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= account.id %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= account.name %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= account.atype %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= number_to_currency(account.balance) %></td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white"><%= account.interest_rate %> %</td>
-  <td class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-white">
-    <%= link_to "Edit", edit_account_path(account), class: "rounded-lg py-3 px-5 bg-orange-100 hover:bg-orange-500 hover:text-white inline-block font-medium" %>
-    <%= link_to "Delete", account, method: :delete, data: { confirm: "Are you sure?" }, class: "rounded-lg py-3 px-5 bg-red-100 hover:bg-red-500 hover:text-white inline-block font-medium" %>
-  </td>
-</tr>
+<div id="<%= dom_id account %>" class="flex justify-between items-center p-1 border-b border-gray-200 dark:text-white">
+  <span class="my-1 flex-1">
+    <%= account.name %>
+  </span>
+  <span class="my-1 flex-1">
+    <%= account.atype %>
+  </span>
+  <span class="my-1 flex-1">
+    <%= number_to_currency(account.balance) %>
+  </span>
+  <span class="my-1 flex-1 flex dark:text-black">
+    <%= link_to "Transactions", account_transactions_path(account), class: "btn-grouped btn-primary rounded-l-lg" %>
+    <%= link_to "Edit", edit_account_path(account), class: "btn-grouped btn-secondary -ml-px" %>
+    <%= button_to "Destroy", account, method: :delete, class: "btn-grouped btn-danger rounded-r-lg -ml-px" %>
+  </span>
+</div>

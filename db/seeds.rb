@@ -12,11 +12,12 @@
 p "Cleaning up the database"
 Transaction.destroy_all
 Account.destroy_all
+Budget.destroy_all
 User.destroy_all
 p "Cleaned up the database"
 
-# Create a test user
-User.create!(
+p "Creating test user"
+user = User.create!(
   email: 'steven.bengtson@me.com',
   password: 'password',
   password_confirmation: 'password',
@@ -24,24 +25,44 @@ User.create!(
   confirmed_at: Faker::Date.between(from: 1.year.ago, to: Date.today),
   confirmation_token: nil,
 )
+p "Created user: #{user.email}"
 
-p "Created user: #{User.first.email}"
+p "Creating second test user"
+User.create!(
+  email: 'test@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  name: 'Test User',
+  confirmed_at: Faker::Date.between(from: 1.year.ago, to: Date.today),
+  confirmation_token: nil,
+)
+p "Created user: #{User.last.email}"
 
-# Create test accounts
+p "Creating test budgets"
+10.times do |i|
+  Budget.create!(
+    user: User.all.sample,
+    title: Faker::Company.name,
+  )
+end
+p "Created #{Budget.count} budgets"
+
+p "Creating test accounts"
 100.times do |i|
   Account.create!(
-    user: User.first,
+    user: User.all.sample,
     name: Faker::Company.name,
     description: Faker::Company.catch_phrase,
     atype: %w[Checking Savings Credit].sample,
     balance_cents: Faker::Number.number(digits: 6),
     interest_rate: Faker::Number.decimal(l_digits: 2),
     opened_at: Faker::Date.between(from: 1.year.ago, to: Date.today),
+    budget: Budget.all.sample,
   )
 end
 p "Created #{Account.count} accounts"
 
-# Create test transactions
+p "Creating test transactions"
 1000.times do |i|
   Transaction.create!(
     account: Account.all.sample,

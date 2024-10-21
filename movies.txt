@@ -1,0 +1,171 @@
+# Setup Ruby on Rails project
+1. **Create a new Rails application**:
+   ```bash
+   rails new movie_list_app -d sqlite3
+   ```
+
+2. **Move into the project directory**:
+   ```bash
+   cd movie_list_app
+   ```
+
+3. **Add TailwindCSS**:
+   Add TailwindCSS to your Rails application by using the Tailwind CSS installer for Rails:
+   ```bash
+   rails tailwindcss:install
+   ```
+
+4. **Add HTMX**:
+   Add HTMX to your application by including it in your application layout. Add the following to your `app/views/layouts/application.html.erb` inside the `<head>` tag:
+   ```html
+   <script src="https://unpkg.com/htmx.org@1.6.1"></script>
+   ```
+
+5. **Add the MovieDB API key**:
+   Sign up at [The Movie Database (TMDb)](https://www.themoviedb.org/) and get your API key.
+
+   Then, create a `.env` file to store your API key securely (using the `dotenv-rails` gem for this purpose). Add `dotenv-rails` to your Gemfile:
+   ```ruby
+   gem 'dotenv-rails'
+   ```
+   Run `bundle install`, and create a `.env` file:
+   ```
+   TMDB_API_KEY=your_api_key_here
+   ```
+
+6. **Generate the Movie Scaffold**:
+   Generate a Movie scaffold to manage the movies in your list:
+   ```bash
+   rails generate scaffold Movie title:string overview:text release_date:string poster_path:string
+   rails db:migrate
+   ```
+
+7. **Create a Movies Controller for Searching**:
+   Create a controller to handle movie search functionality. Generate a controller called `search`:
+   ```bash
+   rails generate controller Search index
+   ```
+
+   Update `config/routes.rb` to add a route for the search functionality:
+   ```ruby
+   Rails.application.routes.draw do
+     resources :movies
+     get 'search', to: 'search#index'
+     post 'search', to: 'search#results'
+     root 'movies#index'
+   end
+   ```
+
+8. **Implement Search Logic**:
+   In the `SearchController`, use the TMDb API to search for movies. Update `app/controllers/search_controller.rb`:
+   ```ruby
+   require 'net/http'
+   require 'json'
+
+   class SearchController < ApplicationController
+     def index
+     end
+
+     def results
+       query = params[:query]
+       url = URI("https://api.themoviedb.org/3/search/movie?api_key=#{ENV['TMDB_API_KEY']}&query=#{URI.encode(query)}")
+       response = Net::HTTP.get(url)
+       @movies = JSON.parse(response)['results']
+
+       respond_to do |format|
+         format.html { render partial: 'results', locals: { movies: @movies } }
+       end
+     end
+   end
+   ```
+
+9. **Create the Search View**:
+   In `app/views/search/index.html.erb`, create a form to search for movies:
+   ```erb
+   <h1>Search for Movies</h1>
+   <%= form_with url: search_path, method: :post, remote: true, id: 'search-form' do %>
+     <%= label_tag :query, 'Movie Title' %>
+     <%= text_field_tag :query %>
+     <%= submit_tag 'Search' %>
+   <% end %>
+
+   <div id="results">
+     <!-- Search results will be injected here by HTMX -->
+   </div>
+   ```
+
+10. **Create Partial for Search Results**:
+    Create a partial view for the search results in `app/views/search/_results.html.erb`:
+    ```erb
+    <% movies.each do |movie| %>
+      <div class="movie">
+        <h3><%= movie['title'] %></h3>
+        <p><%= movie['overview'] %></p>
+        <p>Release Date: <%= movie['release_date'] %></p>
+        <%= button_to 'Add to List', movies_path(movie: { title: movie['title'], overview: movie['overview'], release_date: movie['release_date'], poster_path: movie['poster_path'] }), method: :post, remote: true %>
+      </div>
+    <% end %>
+    ```
+
+11. **Update MoviesController to Handle Additions**:
+    Update the `MoviesController` to handle adding movies from the search results:
+    ```ruby
+    class MoviesController < ApplicationController
+      def create
+        @movie = Movie.new(movie_params)
+        if @movie.save
+          respond_to do |format|
+            format.html { redirect_to movies_path, notice: 'Movie was successfully added.' }
+            format.js   # This will look for a create.js.erb file
+          end
+        else
+          render :new
+        end
+      end
+
+      private
+
+      def movie_params
+        params.require(:movie).permit(:title, :overview, :release_date, :poster_path)
+      end
+    end
+    ```
+
+12. **Add Tailwind Styling**:
+    You can now add TailwindCSS classes to your views to make everything look nicer. For example, you can update `app/views/search/_results.html.erb`:
+    ```erb
+    <% movies.each do |movie| %>
+      <div class="movie p-4 border rounded-lg shadow-md mb-4">
+        <h3 class="text-xl font-bold"><%= movie['title'] %></h3>
+        <p class="text-sm"><%= movie['overview'] %></p>
+        <p class="text-gray-600">Release Date: <%= movie['release_date'] %></p>
+        <%= button_to 'Add to List', movies_path(movie: { title: movie['title'], overview: movie['overview'], release_date: movie['release_date'], poster_path: movie['poster_path'] }), method: :post, remote: true, class: 'mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded' %>
+      </div>
+    <% end %>
+    ```
+
+13. **Enable Remote Responses**:
+    To make the additions seamless, create `app/views/movies/create.js.erb` to append the new movie to the list without refreshing the page:
+    ```js.erb
+    document.querySelector('#movies-list').insertAdjacentHTML('beforeend', "<%= j render @movie %>");
+    ```
+
+14. **Add the Movie List to the Index Page**:
+    Update `app/views/movies/index.html.erb` to display the list of saved movies:
+    ```erb
+    <h1>My Movie List</h1>
+    <div id="movies-list">
+      <%= render @movies %>
+    </div>
+    ```
+
+15. **Run the Application**:
+    Finally, start your Rails server:
+    ```bash
+    rails server
+    ```
+
+    Visit `http://localhost:3000/search` to search for movies and add them to your list!
+
+### Summary
+You've now created a Ruby on Rails application using SQLite, TailwindCSS, and HTMX that allows you to search for movies via the TMDb API and add them to a personal list. This app utilizes AJAX functionality via HTMX for a smoother user experience.

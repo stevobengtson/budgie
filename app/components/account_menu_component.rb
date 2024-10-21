@@ -4,6 +4,7 @@ class AccountMenuComponent < ViewComponent::Base
   end
 
   def render?
-    @user.present? && @user.accounts.any?
+    false
+    # @user.present? && @user.accounts.any?
   end
 end

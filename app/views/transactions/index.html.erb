@@ -1,44 +1,13 @@
-<div class="px-4 sm:px-6 lg:px-8">
-  <div class="sm:flex sm:items-center">
-    <div class="sm:flex-auto">
-      <h1 class="text-base font-semibold leading-6 text-gray-900">transactions</h1>
-      <% if @account.present? %>
-        <p class="mt-2 text-sm text-gray-700">showing transactions for <%= @account.name %>.</p>
-      <% else %>
-        <p class="mt-2 text-sm text-gray-700">a list of all transactions in your account.</p>
-      <% end %>
-    </div>
-    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-      <%= link_to "add transaction", new_transaction_path, class: "block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" %>
-    </div>
-  </div>
-  <div class="mt-8 flow-root h-full">
-    <div class="h-full -mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-      <div class="inline-block min-w-full h-full">
-        <g-responsive>
-          <g-table style="grid-template-columns: 120px 120px 2fr 1fr;">
-            <g-thead>
-              <g-tr>
-                <g-th>Date</g-th>
-                <g-th>Amount</g-th>
-                <g-th>Memo</g-th>
-                <g-th>Actions</g-th>
-              </g-tr>
-            </g-thead>
-            <g-tbody id="transactions">
-              <%= render @transactions %>
-            </g-tbody>
-          </g-table>
-        </g-responsive>
-        <%= render "table/next_page_auto_scroll" %>
+<div class="w-full">
+  <% content_for :title, "Transactions" %>
 
-              <%#= render tableheadcomponent.new(columns: [
-                { :title => "entry date", :sortable => true, :column => "entry_date" },
-                { :title => "amount", :sortable => true, :column => "amount" },
-                { :title => "cleared", :sortable => true, :column => "cleared" },
-                { :title => "actions" }
-              ]) %>
-      </div>
-    </div>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl dark:text-white">Transactions</h1>
+    <%= link_to "New transaction", new_account_transaction_path(@account), class: "rounded-lg py-3 px-5 bg-blue-500 hover:bg-blue-700 text-white block font-medium" %>
+    <%= link_to "Back to accounts", budget_accounts_path(@account.budget), class: "rounded-lg py-3 px-5 bg-blue-500 hover:bg-blue-700 text-white block font-medium" %>
+  </div>
+
+  <div id="accounts" class="min-w-full">
+    <%= render "list" %>
   </div>
 </div>

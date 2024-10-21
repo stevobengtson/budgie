@@ -1,7 +1,0 @@
-<%= turbo_stream.append :transactions do %>
-    <%= render @transactions %>
-<% end %>
-
-<%= turbo_stream.replace :pagination do %>
-  <%= render "table/next_page_auto_scroll" %>
-<% end %>

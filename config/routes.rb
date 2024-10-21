@@ -1,18 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :transactions do
-    collection do
-      get '/', to: 'transactions#index'
+  resources :budgets, shallow: true, except: [ :show ] do
+    resources :accounts, shallow: true, except: [ :show ] do
+      resources :transactions, shallow: true, except: [ :show ]
     end
   end
-  resources :accounts do
-    resources :transactions, only: [:account_summary] do
-      collection do
-        get '/', to: 'transactions#account_summary'
-      end
-    end
-  end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
@@ -23,5 +15,5 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  root "accounts#index"
+  root "budgets#index"
 end
