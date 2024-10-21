@@ -41,7 +41,7 @@ gem "devise", "~> 4.9"
 
 gem "pagy", "~> 9.0"
 
-gem "view_component", "~> 3.14"
+gem "view_component", "~> 3.18"
 
 gem "font-awesome-sass", "~> 6.5.2"
 
