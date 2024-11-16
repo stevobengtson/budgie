@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  gategory_group: one
+  category_group: one
 
 two:
   name: MyString
-  gategory_group: two
+  category_group: two

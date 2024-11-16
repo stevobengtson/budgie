@@ -5,17 +5,27 @@
 
   <% content_for :title, "Categories" %>
 
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center pb-5">
     <h1 class="font-bold text-4xl">Categories</h1>
     <%= link_to "New category", new_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to "New category group", new_category_group_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="categories" class="min-w-full">
-    <% @categories.each do |category| %>
-      <%= render category %>
-      <p>
-        <%= link_to "Show this category", category, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
+  <div id="categories" class="mx-auto bg-white shadow-md rounded border border-gray-200 overflow-hidden mb-5">
+    <% category_group_id = 0 %>
+    <% @category_groups.each do |category_group| %>
+      <% if category_group.id != category_group_id %>
+        <div class="grid grid-cols-2 border-b-2 border-b-black bg-gray-200 pr-2 pl-2">
+          <div>
+            <h2 class="font-bold text-2xl mt-2 mb-2"><%= category_group.name %></h2>
+          </div>
+          <div class="text-end">
+            <%= button_to "Delete Group", category_group, method: :delete, class: "mt-2 rounded-lg py-1 px-2 bg-red-100 font-medium" %>
+          </div>
+        </div>
+        <% category_group_id = category_group.id %>
+      <% end %>
+      <%= render(category_group.categories) || render('empty') %>
     <% end %>
   </div>
 </div>

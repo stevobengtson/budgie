@@ -13,9 +13,6 @@
   <div id="category_groups" class="min-w-full">
     <% @category_groups.each do |category_group| %>
       <%= render category_group %>
-      <p>
-        <%= link_to "Show this category group", category_group, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
     <% end %>
   </div>
 </div>

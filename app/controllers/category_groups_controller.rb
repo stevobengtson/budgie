@@ -25,7 +25,7 @@ class CategoryGroupsController < ApplicationController
 
     respond_to do |format|
       if @category_group.save
-        format.html { redirect_to @category_group, notice: "Category group was successfully created." }
+        format.html { redirect_to categories_path, notice: "Category group was successfully created." }
         format.json { render :show, status: :created, location: @category_group }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class CategoryGroupsController < ApplicationController
   def update
     respond_to do |format|
       if @category_group.update(category_group_params)
-        format.html { redirect_to @category_group, notice: "Category group was successfully updated." }
+        format.html { redirect_to categories_path, notice: "Category group was successfully updated." }
         format.json { render :show, status: :ok, location: @category_group }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class CategoryGroupsController < ApplicationController
     @category_group.destroy!
 
     respond_to do |format|
-      format.html { redirect_to category_groups_path, status: :see_other, notice: "Category group was successfully destroyed." }
+      format.html { redirect_to categories_path, status: :see_other, notice: "Category group was successfully destroyed." }
       format.json { head :no_content }
     end
   end
