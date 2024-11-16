@@ -1,0 +1,19 @@
+<div id="<%= dom_id transaction %>" class="grid grid-cols-5 border-b border-gray-300 text-center py-2">
+  <div>
+    <%= transaction.account.name %>
+  </div>
+  <div>
+    <%= transaction.entry %>
+  </div>
+  <div class="text-left">
+    <%= transaction.description %>
+  </div>
+  <div>
+    <%= number_to_currency(transaction.amount) %>
+  </div>
+  <div class="flex space-x-2 justify-center">
+    <%= link_to "Edit", edit_transaction_path(transaction), class: "rounded-lg py-1 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= button_to "Delete", transaction, method: :delete, class: "rounded-lg py-1 px-5 bg-gray-100 inline-block font-medium" %>
+  </div>
+</div>
+

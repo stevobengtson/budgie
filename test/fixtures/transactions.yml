@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  entry: 2024-11-15
+  description: MyText
+  amount: 9.99
+
+two:
+  entry: 2024-11-15
+  description: MyText
+  amount: 9.99
