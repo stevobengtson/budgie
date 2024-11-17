@@ -15,7 +15,7 @@ class AccountsTest < ApplicationSystemTestCase
     click_on "New account"
 
     fill_in "Name", with: @account.name
-    fill_in "Type", with: @account.type
+    fill_in "Type", with: @account.account_type
     click_on "Create Account"
 
     assert_text "Account was successfully created"
@@ -27,7 +27,7 @@ class AccountsTest < ApplicationSystemTestCase
     click_on "Edit this account", match: :first
 
     fill_in "Name", with: @account.name
-    fill_in "Type", with: @account.type
+    fill_in "Type", with: @account.account_type
     click_on "Update Account"
 
     assert_text "Account was successfully updated"

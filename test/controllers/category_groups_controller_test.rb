@@ -20,7 +20,7 @@ class CategoryGroupsControllerTest < ActionDispatch::IntegrationTest
       post category_groups_url, params: { category_group: { name: @category_group.name } }
     end
 
-    assert_redirected_to category_group_url(CategoryGroup.last)
+    assert_redirected_to categories_url(CategoryGroup.last)
   end
 
   test "should show category_group" do
@@ -35,7 +35,7 @@ class CategoryGroupsControllerTest < ActionDispatch::IntegrationTest
 
   test "should update category_group" do
     patch category_group_url(@category_group), params: { category_group: { name: @category_group.name } }
-    assert_redirected_to category_group_url(@category_group)
+    assert_redirected_to categories_url(@category_group)
   end
 
   test "should destroy category_group" do
@@ -43,6 +43,6 @@ class CategoryGroupsControllerTest < ActionDispatch::IntegrationTest
       delete category_group_url(@category_group)
     end
 
-    assert_redirected_to category_groups_url
+    assert_redirected_to categories_url
   end
 end
