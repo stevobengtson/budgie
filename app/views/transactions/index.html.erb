@@ -1,11 +1,4 @@
 <div class="w-full">
-  <% if notice.present? %>
-    <p
-      class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block"
-      id="notice"
-    ><%= notice %></p>
-  <% end %>
-
   <% content_for :title, "Transactions" %>
 
   <div class="flex justify-between items-center pb-5">
@@ -15,7 +8,7 @@
         <%= select nil, :account_id, [['All', 0]].concat(Account.all.collect { |a| [a.name, a.id] }), { include_blank: false, prompt: 'Select Account', selected: @selected_account_id }, { class: " w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", onchange: "this.form.submit();" } %>
       <% end %>
     </div>
-    <%= link_to "New transaction", new_transaction_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= link_to "New transaction", new_transaction_path, { data: {turbo_frame: "modal"}, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" } %>
   </div>
 
   <div id="transactions" class="mx-auto bg-white shadow-md rounded border border-gray-200 overflow-hidden mb-5">

@@ -1,12 +1,12 @@
-<div id="<%= dom_id account %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
+<div id="<%= dom_id account %>" class="grid grid-cols-3 border-b border-gray-300 text-center py-2">
+  <div>
     <%= account.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Type:</strong>
-    <%= account.account_type %>
-  </p>
-
+  </div>
+  <div>
+    <%= account.account_type.humanize %>
+  </div>
+  <div class="flex space-x-2 justify-center">
+    <%= link_to "Edit", edit_account_path(account), class: "bg-teal-600 hover:bg-teal-700 rounded py-1 px-5 bg-gray-100 dark:text-black inline-block font-medium" %>
+    <%= link_to "Delete", account_path(account), data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "bg-red-100 hover:bg-red-200 rounded py-1 px-5 dark:text-black inline-block font-medium" %>
+  </div>
 </div>
