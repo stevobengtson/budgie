@@ -12,8 +12,8 @@
     <%= number_to_currency(transaction.amount) %>
   </div>
   <div class="flex space-x-2 justify-center">
-    <%= link_to "Edit", edit_transaction_path(transaction), class: "rounded-lg py-1 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= button_to "Delete", transaction, method: :delete, class: "rounded-lg py-1 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Edit", edit_transaction_path(transaction), class: "rounded-lg py-1 px-5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-200 dark:text-black dark:hover:bg-gray-300 inline-block font-medium" %>
+    <%= button_to "Delete", transaction, method: :delete, class: "rounded-lg py-1 px-5 bg-red-100 hover:bg-red-200 dark:bg-red-200 dark:text-black dark:hover:bg-red-200 inline-block font-medium" %>
   </div>
 </div>
 
