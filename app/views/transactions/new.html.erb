@@ -1,11 +1,12 @@
-<turbo-frame id="modal">
-  <%= tag.button type: :button, data: {action: "modal#hide"}, class: "fixed inset-0 block w-full h-screen cursor-default bg-gray-900/30" %>
-  <div data-controller="modal" data-action="turbo:submit-end->modal#hideOnSubmit keydown.esc->modal#hide" role="dialog" tabindex="-1" class="fixed inset-0 z-30 flex items-center justify-center w-full h-screen p-2">
-    <%= button_to nil, nil, type: :button, method: :get, form: { data: {action: "modal#hide"} }, class: "fixed inset-0 block w-full h-screen cursor-default bg-gray-900/30" %>
-    <div class="relative z-20 w-full max-w-2xl max-h-screen overflow-y-auto bg-white shadow-lg rounded-md">
-      <h1 class="font-bold text-4xl">New transaction</h1>
-      <%= render "form", transaction: @transaction %>
-      <%= link_to "Back to transactions", transactions_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+<%= turbo_frame_tag "model" do %>
+  <div aria-labelledby="modal-title"
+    aria-modal="true" class="fixed inset-0 z-50 overflow-y-auto bg-black/80" role="dialog">
+    <div class="h-screen w-full relative flex items-center justify-center">
+      <div class="shadow-xl max-w-2xl bg-white m-1 p-8 prose prose-indigo origin-bottom mx-auto dark:bg-slate-700 dark:text-slate-200 min-w-[600px] rounded-2xl">
+
+        <h1 id="modal-title" class="dark:text-slate-100">New transaction</h1>
+        <%= render "form", transaction: @transaction %>
+      </div>
     </div>
   </div>
-</turbo-frame>
+<% end %>
