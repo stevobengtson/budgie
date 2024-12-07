@@ -5,14 +5,37 @@
     <h1 class="font-bold text-4xl">Transactions</h1>
     <div class="flex justify-center items-center">
       <%= form_tag transactions_path, method: "get", class: "flex items-center space-x-2" do %>
-        <%= select nil, :account_id, [['All', 0]].concat(Account.all.collect { |a| [a.name, a.id] }), { include_blank: false, prompt: 'Select Account', selected: @selected_account_id }, { class: " w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500", onchange: "this.form.submit();" } %>
+        <%= select nil,
+        :account_id,
+        [["All", 0]].concat(Account.all.collect { |a| [a.name, a.id] }),
+        {
+          include_blank: false,
+          prompt: "Select Account",
+          selected: @selected_account_id,
+        },
+        {
+          class:
+            " w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
+          onchange: "this.form.submit();",
+        } %>
       <% end %>
     </div>
-    <%= link_to "New transaction", new_transaction_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <%= new_button new_transaction_path %>
   </div>
 
-  <div id="transactions" class="mx-auto bg-white dark:bg-gray-700 shadow-md rounded border border-gray-200 overflow-hidden mb-5">
-    <div class="grid grid-cols-6 bg-gray-200 text-gray-700 dark:bg-gray-900 dark:text-white font-bold text-center py-2">
+  <div
+    id="transactions"
+    class="
+      mx-auto bg-white dark:bg-gray-700 shadow-md rounded border border-gray-200
+      overflow-hidden mb-5
+    "
+  >
+    <div
+      class="
+        grid grid-cols-6 bg-gray-200 text-gray-700 dark:bg-gray-900 dark:text-white
+        font-bold text-center py-2
+      "
+    >
       <div>
         <strong class="block font-medium mb-1">Account</strong>
       </div>

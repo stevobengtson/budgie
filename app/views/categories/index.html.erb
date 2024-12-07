@@ -2,9 +2,8 @@
   <% content_for :title, "Categories" %>
 
   <div class="flex justify-between items-center pb-5">
-    <h1 class="font-bold text-4xl">Categories</h1>
-    <%= link_to "New category", new_category_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
-    <%= link_to "New category group", new_category_group_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
+    <h1 class="font-bold text-4xl">Categories by Group</h1>
+    <%= new_button new_category_group_path, "New Category Group" %>
   </div>
 
   <div id="categories" class="mx-auto bg-white shadow-md rounded border border-gray-200 overflow-hidden mb-5">
@@ -15,8 +14,9 @@
           <div>
             <h2 class="font-bold text-2xl mt-2 mb-2"><%= category_group.name %></h2>
           </div>
-          <div class="text-end">
-            <%= button_to "Delete Group", category_group, method: :delete, class: "mt-2 rounded-lg py-1 px-2 bg-red-100 font-medium" %>
+          <div class="flex space-x-2 justify-end py-2">
+            <%= new_button new_category_path(category_group_id: category_group.id), "New Category" %>
+            <%= delete_button category_group, "Delete Group" %>
           </div>
         </div>
         <% category_group_id = category_group.id %>

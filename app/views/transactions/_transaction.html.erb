@@ -1,4 +1,7 @@
-<div id="<%= dom_id transaction %>" class="grid grid-cols-6 border-b border-gray-300 text-center py-2">
+<div
+  id="<%= dom_id transaction %>"
+  class="grid grid-cols-6 border-b border-gray-300 text-center py-2"
+>
   <div>
     <%= transaction.account.name %>
   </div>
@@ -6,7 +9,8 @@
     <%= transaction.entry %>
   </div>
   <div>
-    <%= transaction.category.category_group.name %>: <%= transaction.category.name %>
+    <%= transaction.category.category_group.name %>:
+    <%= transaction.category.name %>
   </div>
   <div class="text-left">
     <%= transaction.description %>
@@ -15,8 +19,7 @@
     <%= number_to_currency(transaction.amount) %>
   </div>
   <div class="flex space-x-2 justify-center">
-    <%= link_to "Edit", edit_transaction_path(transaction), class: "rounded-lg py-1 px-5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-200 dark:text-black dark:hover:bg-gray-300 inline-block font-medium" %>
-    <%= button_to "Delete", transaction, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "rounded-lg py-1 px-5 bg-red-100 hover:bg-red-200 dark:bg-red-200 dark:text-black dark:hover:bg-red-200 inline-block font-medium" %>
+    <%= edit_button edit_transaction_path(transaction) %>
+    <%= delete_button transaction %>
   </div>
 </div>
-

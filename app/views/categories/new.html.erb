@@ -1,7 +1,12 @@
-<div class="mx-auto md:w-2/3 w-full">
-  <h1 class="font-bold text-4xl">New category</h1>
+<%= turbo_frame_tag "model" do %>
+  <div aria-labelledby="modal-title"
+    aria-modal="true" class="fixed inset-0 z-50 overflow-y-auto bg-black/80" role="dialog">
+    <div class="h-screen w-full relative flex items-center justify-center">
+      <div class="shadow-xl max-w-2xl bg-white m-1 p-8 prose prose-indigo origin-bottom mx-auto dark:bg-slate-700 dark:text-slate-200 min-w-[600px] rounded-2xl">
 
-  <%= render "form", category: @category %>
-
-  <%= link_to "Back to categories", categories_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-</div>
+        <h1 id="modal-title" class="dark:text-slate-100">New Category</h1>
+        <%= render "form", category: @category %>
+      </div>
+    </div>
+  </div>
+<% end %>

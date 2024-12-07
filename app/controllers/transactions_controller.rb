@@ -10,10 +10,6 @@ class TransactionsController < ApplicationController
     @pagy, @transactions = pagy(query)
   end
 
-  # GET /transactions/1 or /transactions/1.json
-  def show
-  end
-
   # GET /transactions/new
   def new
     @transaction = Transaction.new

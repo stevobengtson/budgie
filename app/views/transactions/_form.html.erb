@@ -1,15 +1,5 @@
 <%= form_with(model: transaction, data: { turbo: false }) do |form| %>
-  <% if transaction.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
-
-      <ul>
-        <% transaction.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= form_errors transaction %>
 
   <div class="my-5">
     <%= form.label :account %>
@@ -37,7 +27,7 @@
   </div>
 
   <div class="flex space-x-3 items-center justify-between">
-    <%= form.submit class: "rounded bg-teal-600 hover:bg-teal-700 px-4 py-2 text-center text-white font-medium focus:ring-4 focus:ring-teal-50 hover:cursor-pointer" %>
-    <%= link_to "Cancel", transactions_path, class: "bg-slate-100 rounded px-4 py-2 text-center text-slate-700 font-medium hover:bg-slate-200 focus:ring-4 focus:ring-slate-100 no-underline inline-block", data: { turbo: false } %>
+    <%= submit_button form %>
+    <%= cancel_button transactions_path %>
   </div>
 <% end %>

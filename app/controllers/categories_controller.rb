@@ -13,6 +13,7 @@ class CategoriesController < ApplicationController
   # GET /categories/new
   def new
     @category = Category.new
+    @category.category_group_id = params[:category_group_id] if params[:category_group_id].present?
   end
 
   # GET /categories/1/edit
