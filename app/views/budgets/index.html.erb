@@ -1,0 +1,7 @@
+<div class="mx-auto md:w-2/3 w-full flex">
+  <div class="mx-auto">
+    <%= render @budget %>
+    <%= link_to "Previous", budgets_path(month: @prev_month, year: @prev_year), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 inline-block font-medium" %>
+    <%= link_to "Next", budgets_path(month: @next_month, year: @next_year), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 dark:bg-gray-700 dark:text-gray-200 inline-block font-medium" %>
+  </div>
+</div>

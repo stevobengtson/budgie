@@ -6,7 +6,7 @@
     <%= transaction.account.name %>
   </div>
   <div>
-    <%= transaction.entry %>
+    <%= transaction.entry.strftime("%b %d, %Y") %>
   </div>
   <div>
     <%= transaction.category.category_group.name %>:

@@ -58,6 +58,21 @@ Category.create!(name: "Doctor", category_group: CategoryGroup.find_by(name: "He
 Category.create!(name: "Medication", category_group: CategoryGroup.find_by(name: "Health"))
 Category.create!(name: "Miscellaneous", category_group: CategoryGroup.find_by(name: "Miscellaneous"))
 
+puts "Creating Budgets..."
+current_date = Date.today
+next_date = current_date.next_month
+prev_date = current_date.prev_month
+
+prev_month = prev_date.month
+prev_year = prev_date.year
+Budget.create!(month: prev_month, year: prev_year, income: 0, assigned: 0)
+current_month = current_date.month
+current_year = current_date.year
+Budget.create!(month: current_month, year: current_year, income: 0, assigned: 0)
+next_month = next_date.month
+next_year = next_date.year
+Budget.create!(month: next_month, year: next_year, income: 0, assigned: 0)
+
 puts "Creating Transactions..."
 500.times do
   Transaction.create!(
@@ -65,6 +80,6 @@ puts "Creating Transactions..."
     category: Category.all.sample,
     amount: Faker::Number.decimal(l_digits: 2),
     description: Faker::Lorem.sentence(word_count: 3),
-    entry: Faker::Date.between(from: 1.year.ago, to: Date.today),
+    entry: Faker::Date.between(from: prev_date.beginning_of_month, to: current_date),
   )
 end
