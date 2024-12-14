@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  budget: one
+  category: one
+  starting_amount: 9.99
+  assigned_amount: 9.99
+  required_amount: 9.99
+
+two:
+  budget: two
+  category: two
+  starting_amount: 9.99
+  assigned_amount: 9.99
+  required_amount: 9.99
