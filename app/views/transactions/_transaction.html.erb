@@ -1,4 +1,4 @@
-<div id="<%= dom_id transaction %>" class="grid grid-cols-6 even:bg-gray-700 border-b border-gray-400 text-center py-2">
+<div id="<%= dom_id transaction %>" class="grid grid-cols-6 tgrid-row">
   <div>
     <%= transaction.account.name %>
   </div>
@@ -14,7 +14,7 @@
   <div>
     <%= number_to_currency(transaction.amount) %>
   </div>
-  <div class="flex space-x-2 justify-center">
+  <div class="tgrid-row-actions">
     <%= edit_button edit_transaction_path(transaction) %>
     <%= delete_button transaction %>
   </div>

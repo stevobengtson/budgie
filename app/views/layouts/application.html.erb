@@ -23,7 +23,7 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="text-slate-800 dark:text-slate-200 bg-slate-100 dark:bg-slate-800" data-controller="dark-mode">
+  <body class="text-slate-500 dark:text-slate-200 bg-slate-100 dark:bg-slate-800" data-controller="dark-mode">
     <%= turbo_frame_tag "modal" %>
     <%= render partial: "shared/notifications", locals: { message: flash[:notice] } %>
     <nav class="mx-auto flex bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-800 shadow-md">

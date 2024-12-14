@@ -2,15 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
-/*
-
 @layer components {
   .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
+    @apply rounded py-1 px-5 text-white text-center dark:text-black bg-blue-500 hover:bg-blue-600 no-underline inline-block font-medium;
+  }
+  .btn-secondary {
+    @apply rounded py-1 px-5 text-white text-center dark:text-black bg-teal-500 hover:bg-teal-600 no-underline inline-block font-medium;
+  }
+  .btn-danger {
+    @apply rounded py-1 px-5 text-center text-white dark:text-black bg-red-300 hover:bg-red-400 inline-block font-medium;
+  }
+  .btn-back {
+    @apply rounded py-1 px-5 text-black text-center bg-gray-100 hover:bg-gray-200 no-underline inline-block font-medium;
+  }
+  .btn-cancel {
+    @apply rounded py-1 px-5 text-black text-center bg-gray-100 hover:bg-gray-200 no-underline inline-block font-medium;
+  }
+  .btn-submit {
+    @apply rounded py-1 px-5 text-white text-center dark:text-black bg-teal-500 hover:bg-teal-600 no-underline inline-block font-medium;
+  }
+
+  .tgrid-container {
+    @apply bg-white dark:bg-gray-800 mx-auto rounded-lg shadow-lg overflow-hidden;
+  }
+
+  .tgrid-header {
+    @apply bg-gray-400 text-black dark:bg-gray-900 dark:text-white font-bold text-center py-2;
+  }
+
+  .tgrid-header-column {
+    @apply block font-medium mb-1;
+  }
+
+  .tgrid-row {
+    @apply bg-gray-100 dark:bg-gray-600;
+    @apply even:bg-gray-200 dark:even:bg-gray-700;
+    @apply border-b border-gray-400;
+    @apply text-black dark:text-white text-center py-2;
+    @apply hover:bg-gray-300 dark:hover:bg-gray-800;
+  }
+
+  .tgrid-row-actions {
+    @apply flex space-x-2 justify-center;
+  }
+
+  .tgrid-row-actions-end {
+    @apply flex space-x-2 justify-end pr-2;
+  }
+
+  .currency-indicator-positive {
+    @apply font-medium text-center rounded-lg bg-green-400 text-gray-800 dark:bg-green-800 dark:text-gray-300;
+  }
+
+  .currency-indicator-positive-strong {
+    @apply font-medium text-center rounded-lg bg-green-800 text-gray-300;
+  }
+
+  .currency-indicator-warning {
+    @apply font-medium text-center rounded-lg bg-yellow-200 text-gray-800 dark:bg-yellow-400;
+  }
+
+  .currency-indicator-danger {
+    @apply font-medium text-center rounded-lg bg-red-600 text-gray-300;
   }
 }
-
-*/
 
 .pagy {
   @apply flex space-x-1 font-semibold text-sm text-gray-500;

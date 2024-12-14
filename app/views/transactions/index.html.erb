@@ -25,25 +25,25 @@
     </div>
   </div>
 
-  <div id="transactions" class="mx-auto shadow-md rounded overflow-hidden mb-5">
-    <div class="grid grid-cols-6 bg-gray-200 text-gray-700 dark:bg-gray-900 dark:text-white font-bold text-center py-2">
+  <div id="transactions" class="tgrid-container">
+    <div class="grid grid-cols-6 tgrid-header">
       <div>
-        <strong class="block font-medium mb-1">Account</strong>
+        <strong class="tgrid-header-column">Account</strong>
       </div>
       <div>
-        <%= sortable "entry", "Entry", "block mb-1" %>
+        <%= sortable "entry", "Entry", "tgrid-header-column" %>
       </div>
       <div>
-        <strong class="block font-medium mb-1">Category</strong>
+        <strong class="tgrid-header-column">Category</strong>
       </div>
       <div>
-        <strong class="block font-medium mb-1">Description</strong>
+        <strong class="tgrid-header-column">Description</strong>
       </div>
       <div>
-        <%= sortable "amount", "Amount", "block mb-1" %>
+        <%= sortable "amount", "Amount", "tgrid-header-column" %>
       </div>
       <div>
-        <strong class="block font-medium mb-1">Action</strong>
+        <strong class="tgrid-header-column">Action</strong>
       </div>
     </div>
     <% @transactions.each do |transaction| %>

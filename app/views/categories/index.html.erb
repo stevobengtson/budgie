@@ -1,22 +1,22 @@
 <div class="w-full">
   <% content_for :title, "Categories" %>
 
-  <div class="flex justify-between items-center pb-5">
-    <h1 class="font-bold text-4xl">Categories by Group</h1>
-    <%= new_button new_category_group_path, "New Category Group" %>
+  <div class="grid grid-cols-2 mb-4">
+    <div class="text-left text-2xl font-bold pl-2 pt-2">Categories by Group</div>
+    <div class="text-right pr-2 pt-2"><%= link_to "New Category Group", new_category_group_path, class: "btn-primary" %></div>
   </div>
 
-  <div id="categories" class="mx-auto bg-white dark:bg-gray-700 shadow-md rounded border border-gray-200 overflow-hidden mb-5">
+  <div id="categories" class="tgrid-container">
     <% category_group_id = 0 %>
     <% @category_groups.each do |category_group| %>
       <% if category_group.id != category_group_id %>
-        <div class="grid grid-cols-2 bg-gray-300 text-gray-700 dark:bg-gray-900 dark:text-white font-bold py-2 pr-2 pl-2">
+        <div class="grid grid-cols-2 tgrid-header text-start pl-2">
           <div>
-            <h2 class="font-bold text-2xl mt-2 mb-2"><%= category_group.name %></h2>
+            <h2 class="font-bold text-2xl"><%= category_group.name %></h2>
           </div>
-          <div class="flex space-x-2 justify-end py-2">
-            <%= new_button new_category_path(category_group_id: category_group.id), "New Category" %>
-            <%= delete_button category_group, "Delete Group" %>
+          <div class="tgrid-row-actions-end">
+            <%= link_to "New Category", new_category_path(category_group_id: category_group.id), class: "btn-primary" %>
+            <%= button_to "Delete Group", category_group, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn-danger" %>
           </div>
         </div>
         <% category_group_id = category_group.id %>
