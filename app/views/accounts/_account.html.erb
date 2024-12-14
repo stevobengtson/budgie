@@ -1,9 +1,12 @@
-<div id="<%= dom_id account %>" class="grid grid-cols-3 even:bg-gray-200 dark:even:bg-gray-700 border-b border-gray-400 text-center py-2">
+<div id="<%= dom_id account %>" class="grid grid-cols-4 even:bg-gray-200 dark:even:bg-gray-700 border-b border-gray-400 text-center py-2">
   <div>
     <%= account.name %>
   </div>
   <div>
     <%= account.account_type.humanize %>
+  </div>
+  <div>
+    <%= account.budget ? "Yes" : "No" %>
   </div>
   <div class="flex space-x-2 justify-center">
     <%= edit_button edit_account_path(account) %>
