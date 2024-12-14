@@ -1,16 +1,12 @@
-<div
-  id="<%= dom_id transaction %>"
-  class="grid grid-cols-6 border-b border-gray-300 text-center py-2"
->
+<div id="<%= dom_id transaction %>" class="grid grid-cols-6 even:bg-gray-700 border-b border-gray-400 text-center py-2">
   <div>
     <%= transaction.account.name %>
   </div>
   <div>
     <%= transaction.entry.strftime("%b %d, %Y") %>
   </div>
-  <div>
-    <%= transaction.category.category_group.name %>:
-    <%= transaction.category.name %>
+  <div class="text-left">
+    <%= transaction.category.category_group.name %>: <%= transaction.category.name %>
   </div>
   <div class="text-left">
     <%= transaction.description %>

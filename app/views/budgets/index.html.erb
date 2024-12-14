@@ -1,5 +1,5 @@
 <div class="mx-auto">
-  <div class="grid grid-cols-3 text-center">
+  <div class="grid grid-cols-3 text-center pb-2">
     <div>
       <%= link_to "Previous",
       budgets_path(month: @prev_month, year: @prev_year),
@@ -17,7 +17,67 @@
         "rounded py-1 px-5 text-white text-center dark:text-black bg-teal-500 hover:bg-teal-600 no-underline inline-block font-medium" %>
     </div>
   </div>
+  <div class="text-center mx-auto pb-2">
+    Remaining To Assign: <%= number_to_currency(@budget.remaining_to_assign) %>
+  </div>
   <div>
-    <h1 class="text-center text-2xl font-medium mt-5">Budget</h1>
+    <div class="grid grid-cols-8 gap-8 bg-gray-200 text-gray-700 dark:bg-gray-900 dark:text-white
+      font-bold text-center py-2">
+      <div class="font-medium">
+        Category
+      </div>
+      <div></div>
+      <div class="font-medium">
+        Starting
+      </div>
+      <div class="font-medium">
+        Assigned
+      </div>
+      <div class="font-medium">
+        Required
+      </div>
+      <div class="font-medium">
+        Needed
+      </div>
+      <div class="font-medium">
+        Spent
+      </div>
+      <div class="font-medium">
+        Remain
+      </div>
+    </div>
+    <% for budget_category in @budget.budget_categories %>
+    <div class="grid grid-cols-8 gap-8 border-b border-gray-300 py-2">
+      <div class="font-medium text-left col-span-2 ml-2">
+        <%= budget_category.category.name %>
+      </div>
+      <div class="font-medium text-center">
+        <%= number_to_currency(budget_category.starting_amount) %>
+      </div>
+      <div class="font-medium text-center">
+        <%= number_to_currency(budget_category.assigned_amount) %>
+      </div>
+      <div class="font-medium text-center">
+        <%= number_to_currency(budget_category.required_amount) %>
+      </div>
+      <% if budget_category.needed_amount <= 0 %>
+      <div class="font-medium text-center rounded-lg bg-green-400 text-gray-800 dark:bg-green-800 dark:text-gray-300">
+      <% else %>
+      <div class="font-medium text-center rounded-lg bg-yellow-200 text-gray-800 dark:bg-yellow-400">
+      <% end %>
+          <%= number_to_currency(budget_category.needed_amount.abs) %>
+      </div>
+      <div class="font-medium text-center">
+        <%= number_to_currency(budget_category.spent_amount) %>
+      </div>
+      <% if budget_category.remaining_amount <= 0 %>
+      <div class="font-medium text-center rounded-lg bg-red-600 text-gray-300">
+      <% else %>
+      <div class="font-medium text-center rounded-lg bg-green-800 text-gray-300">
+      <% end %>
+        <%= number_to_currency(budget_category.remaining_amount) %>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>

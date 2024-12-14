@@ -10,12 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_13_061831) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_14_021036) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.integer "account_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "budget_categories", force: :cascade do |t|
+    t.integer "budget_id", null: false
+    t.integer "category_id", null: false
+    t.decimal "starting_amount"
+    t.decimal "assigned_amount"
+    t.decimal "required_amount"
+    t.decimal "spent_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_budget_categories_on_budget_id"
+    t.index ["category_id"], name: "index_budget_categories_on_category_id"
   end
 
   create_table "budgets", force: :cascade do |t|
@@ -53,6 +66,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_13_061831) do
     t.index ["category_id"], name: "index_transactions_on_category_id"
   end
 
+  add_foreign_key "budget_categories", "budgets"
+  add_foreign_key "budget_categories", "categories"
   add_foreign_key "categories", "category_groups"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"

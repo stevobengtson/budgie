@@ -45,4 +45,8 @@ module ApplicationHelper
       end
     end
   end
+
+  def nav_class(controller_name)
+    controller_name == controller.controller_name ? "border-b-4 " : ""
+  end
 end

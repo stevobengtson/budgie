@@ -1,10 +1,10 @@
-<%= form_with(model: budget, class: "contents") do |form| %>
-  <% if budget.errors.any? %>
+<%= form_with(model: budget_category, data: { turbo: false }) do |form| %>
+  <% if budget_category.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(budget.errors.count, "error") %> prohibited this budget from being saved:</h2>
+      <h2><%= pluralize(budget_category.errors.count, "error") %> prohibited this budget from being saved:</h2>
 
       <ul>
-        <% budget.errors.each do |error| %>
+        <% budget_category.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -12,23 +12,8 @@
   <% end %>
 
   <div class="my-5">
-    <%= form.label :month %>
-    <%= form.number_field :month, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :year %>
-    <%= form.number_field :year, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :income %>
-    <%= form.text_field :income, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :assigned %>
-    <%= form.text_field :assigned, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :assigned_amount %>
+    <%= form.text_field :assigned_amount, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

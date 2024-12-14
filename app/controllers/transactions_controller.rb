@@ -1,5 +1,5 @@
 class TransactionsController < ApplicationController
-  before_action :set_transaction, only: %i[ show edit update destroy ]
+  before_action :set_transaction, only: %i[ edit update destroy ]
   helper_method :sort_column, :sort_direction
 
   # GET /transactions or /transactions.json

@@ -6,10 +6,6 @@ class CategoryGroupsController < ApplicationController
     @category_groups = CategoryGroup.all
   end
 
-  # GET /category_groups/1 or /category_groups/1.json
-  def show
-  end
-
   # GET /category_groups/new
   def new
     @category_group = CategoryGroup.new
