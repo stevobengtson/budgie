@@ -4,8 +4,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions or /transactions.json
   def index
-    query = Transaction.order(sort_column => sort_direction)
-    query = query.where(account_id: params[:account_id]) if params[:account_id] && params[:account_id] != "0"
+    query = Transaction.order(sort_column => sort_direction).for_account(params[:account_id])
     @selected_account_id = params[:account_id] || "0"
     @pagy, @transactions = pagy(query)
   end

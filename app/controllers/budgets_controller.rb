@@ -13,9 +13,6 @@ class BudgetsController < ApplicationController
     # Get the budget for the current month and year
     @budget = Budget.find_by(month: @month, year: @year)
     # If the budget doesn't exist, create a new one
-    unless @budget
-      @budget = Budget.new(month: @month, year: @year)
-      @budget.save!
-    end
+    @budget = Budget::Budget.new_budget(@month, @year) unless @budget
   end
 end

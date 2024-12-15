@@ -5,6 +5,6 @@ class Budget < ApplicationRecord
   end
 
   def remaining_to_assign
-    income - assigned
+    (income || 0) - (assigned || 0)
   end
 end

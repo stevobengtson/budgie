@@ -14,12 +14,17 @@ Transaction.destroy_all
 Account.destroy_all
 Category.destroy_all
 CategoryGroup.destroy_all
+Budget.destroy_all
+BudgetCategory.destroy_all
 
 # Create the data
 puts "Creating Accounts..."
 Account.create!(name: "Checking", account_type: :checking)
 Account.create!(name: "Savings", account_type: :savings)
-Account.create!(name: "Credit Card", account_type: :credit_card)
+Account.create!(name: "Visa", account_type: :credit_card)
+Account.create!(name: "Credit Line", account_type: :credit_line)
+Account.create!(name: "Car Loan", account_type: :loan)
+Account.create!(name: "Cash", account_type: :cash)
 
 puts "Creating Categories Groups..."
 CategoryGroup.create!(name: "Income")
@@ -35,9 +40,9 @@ CategoryGroup.create!(name: "Miscellaneous")
 
 puts "Creating Categories..."
 categories = []
-categories << Category.create!(name: "Paycheck", category_group: CategoryGroup.find_by(name: "Income"))
-categories << Category.create!(name: "Bonus", category_group: CategoryGroup.find_by(name: "Income"))
-categories << Category.create!(name: "Interest", category_group: CategoryGroup.find_by(name: "Income"))
+categories << Category.create!(name: "Paycheck", category_group: CategoryGroup.find_by(name: "Income"), is_income: true)
+categories << Category.create!(name: "Bonus", category_group: CategoryGroup.find_by(name: "Income"), is_income: true)
+categories << Category.create!(name: "Interest", category_group: CategoryGroup.find_by(name: "Income"), is_income: true)
 categories << Category.create!(name: "Rent", category_group: CategoryGroup.find_by(name: "Home"))
 categories << Category.create!(name: "Mortgage", category_group: CategoryGroup.find_by(name: "Home"))
 categories << Category.create!(name: "Property Taxes", category_group: CategoryGroup.find_by(name: "Home"))

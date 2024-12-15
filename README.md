@@ -88,6 +88,7 @@ Category - Category the budget is for
 Starting Amount - Amount at the start of the budget month
 Assigned Amount - Amount assigned to the category
 Required Amount - Amount required for the category (Target Amount - Assigned - Starting)
+Spent Amount - Amount that has been spent in the category
 
 ### Category Target
 
