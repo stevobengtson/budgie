@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_15_191341) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_20_060630) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.integer "account_type"
@@ -54,6 +54,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_15_191341) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_income", default: false, null: false
   end
 
   create_table "transactions", force: :cascade do |t|

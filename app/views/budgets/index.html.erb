@@ -45,7 +45,7 @@
         Remain
       </div>
     </div>
-    <% @budget.budget_categories.each { |budget_category| %>
+    <% @budget_categories.each { |budget_category| %>
     <div class="grid grid-cols-8 gap-8 tgrid-row">
       <div class="font-medium text-left col-span-2 ml-2">
         <%= budget_category.category.name %>

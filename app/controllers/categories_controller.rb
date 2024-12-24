@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
-    @category_groups = CategoryGroup.left_outer_joins(:categories).order(name: :asc).distinct
+    @category_groups = CategoryGroup.left_outer_joins(:categories).order(is_income: :desc, name: :asc).distinct
   end
 
   # GET /categories/new
