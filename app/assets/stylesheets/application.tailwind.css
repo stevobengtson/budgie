@@ -4,13 +4,13 @@
 
 @layer components {
   .btn-primary {
-    @apply rounded py-1 px-5 text-white text-center dark:text-black bg-blue-500 hover:bg-blue-600 no-underline inline-block font-medium;
+    @apply rounded p-1 text-white text-center dark:text-black bg-blue-500 hover:bg-blue-600 no-underline inline-block font-medium;
   }
   .btn-secondary {
     @apply rounded py-1 px-5 text-white text-center dark:text-black bg-teal-500 hover:bg-teal-600 no-underline inline-block font-medium;
   }
   .btn-danger {
-    @apply rounded py-1 px-5 text-center text-white dark:text-black bg-red-300 hover:bg-red-400 inline-block font-medium;
+    @apply rounded p-1 text-white text-center dark:text-black bg-red-300 hover:bg-red-400 no-underline inline-block font-medium;
   }
   .btn-back {
     @apply rounded py-1 px-5 text-black text-center bg-gray-100 hover:bg-gray-200 no-underline inline-block font-medium;

@@ -2,11 +2,8 @@ class BudgetService
   def find_or_create_budget(month, year)
     budget = Budget.where(month: month, year: year)
     return budget unless budget.empty?
-
-    ActiveRecord::Base.transaction do
-      budget = Budget.create!(month: month, year: year)
-      create_category_entries(budget)
-    end
+    create_budget(month, year)
+  end
 
   def create_budget(month, year)
     budget = Budget.new(month: month, year: year)

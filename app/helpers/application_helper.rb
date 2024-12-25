@@ -11,16 +11,29 @@ module ApplicationHelper
     link_to raw(title), request.query_parameters.merge({ sort: column, direction: direction }), class: css_class
   end
 
-  def new_button(path, label = "New")
-    link_to label, path, class: "btn-primary"
+  def svg_icon(icon, classes = "")
+    render "icons/#{icon}", classes: "size-6 #{classes}"
   end
 
-  def edit_button(path)
-    link_to "Edit", path, class: "btn-secondary"
+  def new_button(path, label = "New")
+    link_to path, class: "btn-primary inline-flex items-center" do
+      concat(svg_icon("new", "mr-2"))
+      concat(content_tag(:span, label))
+    end
+  end
+
+  def edit_button(path, label = "Edit")
+    link_to path, class: "btn-primary inline-flex items-center" do
+      concat(svg_icon("edit", "mr-2"))
+      concat(content_tag(:span, label))
+    end
   end
 
   def delete_button(path, label = "Delete")
-    button_to label, path, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn-danger"
+    button_to path, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn-danger inline-flex items-center" do
+      concat(svg_icon("delete", "mr-2"))
+      concat(content_tag(:span, label))
+    end
   end
 
   def back_button(path)

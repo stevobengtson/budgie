@@ -17,6 +17,12 @@ namespace :budgie do
     puts "Setting up initial data..."
     SetupService.setup
 
+    budget_service = BudgetService.new
+    budget = budget_service.find_or_create_budget(Date.today.month, Date.today.year)
+    budget_service.calculate_budget(budget)
+  end
+
+  task transactions: :environment do
     puts "Creating Random Transactions..."
     1000.times do
       Transaction.create!(
@@ -27,9 +33,5 @@ namespace :budgie do
         entry: Faker::Date.between(from: 1.year.ago, to: Date.today),
       )
     end
-
-    budget_service = BudgetService.new
-    budget = budget_service.find_or_create_budget(Date.today.month, Date.today.year)
-    budget_service.calculate_budget(budget)
   end
 end
