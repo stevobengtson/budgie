@@ -7,6 +7,11 @@ class BudgetsController < ApplicationController
     @budget = Budget.find_by(month: @month, year: @year)
     # If the budget doesn't exist, create a new one
     @budget = BudgetService.new.find_or_create_budget(@month, @year) unless @budget
+    @budget_categories = BudgetCategory.left_outer_joins(:category)
+                                   .where(budget_id: @budget.id)
+                                   .where('categories.is_income = ?', false)
+                                   .order('categories.name ASC')
+
   end
 
   private

@@ -7,21 +7,22 @@
   </div>
 
   <div id="categories" class="tgrid-container">
-    <% category_group_id = 0 %>
     <% @category_groups.each do |category_group| %>
-      <% if category_group.id != category_group_id %>
-        <div class="grid grid-cols-2 tgrid-header text-start pl-2">
-          <div>
-            <h2 class="font-bold text-2xl"><%= category_group.name %></h2>
-          </div>
-          <div class="tgrid-row-actions-end">
-            <%= link_to "New Category", new_category_path(category_group_id: category_group.id), class: "btn-primary" %>
-            <%= button_to "Delete Group", category_group, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn-danger" %>
-          </div>
+      <div class="grid grid-cols-2 tgrid-header text-start pl-2">
+        <div>
+          <h2 class="font-bold text-2xl"><%= category_group.name %></h2>
         </div>
-        <% category_group_id = category_group.id %>
-      <% end %>
+        <div class="tgrid-row-actions-end">
+          <%= link_to "New Category", new_category_path(category_group_id: category_group.id), class: "btn-primary" %>
+          <% unless category_group.is_income %>
+            <%= button_to "Delete Group", category_group, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn-danger" %>
+          <% end %>
+        </div>
+      </div>
       <%= render(category_group.categories) || render('empty') %>
+      <% if category_group.is_income %>
+        <div class="box-content m-auto h-48 p-8 bg-slate-100 dark:bg-slate-800"><hr/></div>
+      <% end %>
     <% end %>
   </div>
 </div>

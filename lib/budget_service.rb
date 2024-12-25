@@ -8,19 +8,43 @@ class BudgetService
       create_category_entries(budget)
     end
 
+  def create_budget(month, year)
+    budget = Budget.new(month: month, year: year)
+    create_budget_categories(budget, Category.where(is_income: false))
+    budget.save!
     budget
   end
 
-  def create_category_entries(budget)
-    Category.find_each do |category|
-      BudgetCategory.create!(
+  def create_budget_categories(budget, categories)
+    return unless budget.budget_categories.empty?
+    categories.each do |category|
+      budget.budget_categories.build(
         budget: budget,
         category: category,
-        starting_amount: 0, # TODO: Pull this from the previous month
-        assigned_amount: 0,
-        required_amount: 0, # Budget
-        spent_amount: 0, # TODO: Pull this from the transactions for this month
+        starting_amount: 0.00,
+        assigned_amount: 0.00,
+        required_amount: 0.00,
+        spent_amount: 0.00
       )
     end
+  end
+
+  def calculate_budget(budget)
+    budget.budget_categories.each do |budget_category|
+      budget_category.spent_amount = calculate_spent_amount(budget, budget_category.category)
+      budget_category.save!
+    end
+  end
+
+  private
+
+  def calculate_spent_amount(budget, category)
+    category.transactions
+            .where(
+              "strftime('%m', entry) = ? AND strftime('%Y', entry) = ?",
+              format("%02d", budget.month),
+              budget.year.to_s
+            )
+            .sum(:amount)
   end
 end
