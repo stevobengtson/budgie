@@ -57,59 +57,19 @@ namespace :budgie do
     categories << Category.create!(name: "Medication", category_group: CategoryGroup.find_by(name: "Health"))
     categories << Category.create!(name: "Miscellaneous", category_group: CategoryGroup.find_by(name: "Miscellaneous"))
 
-    puts "Creating Budgets..."
+    puts "Creating current budget..."
     current_date = Date.today
-    next_date = current_date.next_month
-    prev_date = current_date.prev_month
+    BudgetService.new.find_or_create_budget(current_date.month, current_date.year)
 
-    prev_month = prev_date.month
-    prev_year = prev_date.year
-    prev_budget = Budget.create!(month: prev_month, year: prev_year, income: Faker::Number.decimal(l_digits: 2), assigned: Faker::Number.decimal(l_digits: 2))
-    current_month = current_date.month
-    current_year = current_date.year
-    current_budget = Budget.create!(month: current_month, year: current_year, income: Faker::Number.decimal(l_digits: 2), assigned: Faker::Number.decimal(l_digits: 2))
-    next_month = next_date.month
-    next_year = next_date.year
-    next_budget = Budget.create!(month: next_month, year: next_year, income: Faker::Number.decimal(l_digits: 2), assigned: Faker::Number.decimal(l_digits: 2))
-
-    puts "Creating Budget Categories..."
-    for category in categories
-      puts "Creating Budget Category for #{category.name}..."
-      BudgetCategory.create!(
-        budget: prev_budget,
-        category: category,
-        starting_amount: Faker::Number.decimal(l_digits: 2),
-        assigned_amount: Faker::Number.decimal(l_digits: 2),
-        required_amount: Faker::Number.decimal(l_digits: 2),
-        spent_amount: Faker::Number.decimal(l_digits: 2),
-      )
-      BudgetCategory.create!(
-        budget: current_budget,
-        category: category,
-        starting_amount: Faker::Number.decimal(l_digits: 2),
-        assigned_amount: Faker::Number.decimal(l_digits: 2),
-        required_amount: Faker::Number.decimal(l_digits: 2),
-        spent_amount: Faker::Number.decimal(l_digits: 2),
-      )
-      BudgetCategory.create!(
-        budget: next_budget,
-        category: category,
-        starting_amount: Faker::Number.decimal(l_digits: 2),
-        assigned_amount: Faker::Number.decimal(l_digits: 2),
-        required_amount: Faker::Number.decimal(l_digits: 2),
-        spent_amount: Faker::Number.decimal(l_digits: 2),
-      )
-    end
-
-    puts "Creating Transactions..."
-    1000.times do
-      Transaction.create!(
-        account: Account.all.sample,
-        category: Category.all.sample,
-        amount: Faker::Number.decimal(l_digits: 2),
-        description: Faker::Lorem.sentence(word_count: 3),
-        entry: Faker::Date.between(from: prev_date.beginning_of_month, to: current_date),
-      )
-    end
+    # puts "Creating Transactions..."
+    # 1000.times do
+    #   Transaction.create!(
+    #     account: Account.all.sample,
+    #     category: Category.all.sample,
+    #     amount: Faker::Number.decimal(l_digits: 2),
+    #     description: Faker::Lorem.sentence(word_count: 3),
+    #     entry: Faker::Date.between(from: prev_date.beginning_of_month, to: current_date),
+    #   )
+    # end
   end
 end

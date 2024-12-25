@@ -1,18 +1,32 @@
 class BudgetsController < ApplicationController
+  before_action :get_dates, only: [ :index ]
+
   # GET /budgets or /budgets.json
   def index
-    # Calculate the current month and year, unless supplied by params 'month', 'year'
-    @month = params[:month]&.to_i || Date.today.month
-    @year = params[:year]&.to_i || Date.today.year
-    # Calculate the previous and next months
-    current_date = Date.new(@year, @month, 1)
-    @prev_month = current_date.prev_month.month
-    @prev_year = current_date.prev_month.year
-    @next_month = current_date.next_month.month
-    @next_year = current_date.next_month.year
     # Get the budget for the current month and year
     @budget = Budget.find_by(month: @month, year: @year)
     # If the budget doesn't exist, create a new one
-    @budget = Budget::Budget.new_budget(@month, @year) unless @budget
+    @budget = BudgetService.new.find_or_create_budget(@month, @year) unless @budget
+  end
+
+  private
+
+  def budget_params
+    params.require(:budget).permit(:month, :year, :amount)
+  end
+
+  def get_dates
+    if params[:date].present?
+      @year = params[:date].scan(/\d{4}/).first.to_i
+      @month = params[:date].scan(/\d{2}/).last.to_i
+    else
+      @month = params[:month]&.to_i || Date.today.month
+      @year = params[:year]&.to_i || Date.today.year
+    end
+
+    # Calculate the previous and next months
+    current_date = Date.new(@year, @month, 1)
+    @prev_date = "%02d" % current_date.prev_month.year + "%02d" % current_date.prev_month.month
+    @next_date = "%02d" % current_date.next_month.year + "%02d" % current_date.next_month.month
   end
 end

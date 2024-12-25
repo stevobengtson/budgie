@@ -2,7 +2,7 @@
   <div class="grid grid-cols-3 text-center pb-2">
     <div>
       <%= link_to "Previous",
-      budgets_path(month: @prev_month, year: @prev_year),
+      budgets_month_path(date: @prev_date),
       class:
         "rounded py-1 px-5 text-white text-center dark:text-black bg-teal-500 hover:bg-teal-600 no-underline inline-block font-medium" %>
     </div>
@@ -12,7 +12,7 @@
     </div>
     <div>
       <%= link_to "Next",
-      budgets_path(month: @next_month, year: @next_year),
+      budgets_month_path(date: @next_date),
       class:
         "rounded py-1 px-5 text-white text-center dark:text-black bg-teal-500 hover:bg-teal-600 no-underline inline-block font-medium" %>
     </div>
@@ -21,22 +21,12 @@
     Remaining To Assign: <%= number_to_currency(@budget.remaining_to_assign) %>
   </div>
   <div class="tgrid-container">
-    <div class="grid grid-cols-8 tgrid-header">
+    <div class="grid grid-cols-4 tgrid-header">
       <div class="tgrid-header-column">
         Category
       </div>
-      <div></div>
       <div class="tgrid-header-column">
-        Starting
-      </div>
-      <div class="tgrid-header-column">
-        Assigned
-      </div>
-      <div class="tgrid-header-column">
-        Required
-      </div>
-      <div class="tgrid-header-column">
-        Needed
+        Budget
       </div>
       <div class="tgrid-header-column">
         Spent
@@ -46,21 +36,12 @@
       </div>
     </div>
     <% @budget.budget_categories.each { |budget_category| %>
-    <div class="grid grid-cols-8 gap-8 tgrid-row">
-      <div class="font-medium text-left col-span-2 ml-2">
+    <div class="grid grid-cols-4 gap-8 tgrid-row">
+      <div class="font-medium text-left ml-2">
         <%= budget_category.category.name %>
       </div>
       <div class="font-medium text-center">
-        <%= number_to_currency(budget_category.starting_amount) %>
-      </div>
-      <div class="font-medium text-center">
-        <%= number_to_currency(budget_category.assigned_amount) %>
-      </div>
-      <div class="font-medium text-center">
         <%= number_to_currency(budget_category.required_amount) %>
-      </div>
-      <div class="currency-indicator-<%= budget_category.needed_amount <= 0 ? 'positive' : 'warning' %>">
-          <%= number_to_currency(budget_category.needed_amount.abs) %>
       </div>
       <div class="font-medium text-center">
         <%= number_to_currency(budget_category.spent_amount) %>

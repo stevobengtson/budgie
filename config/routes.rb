@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   resources :category_groups, except: [ :show ]
   resources :accounts, except: [ :show ]
   resources :transactions, except: [ :show ]
-  resources :budgets, only: [ :index ]
+  # resources :budgets, only: [ :index ]
+
+  get "budgets" => "budgets#index", as: :budgets
+  get "budgets/:date" => "budgets#index", as: :budgets_month
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
