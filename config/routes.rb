@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   resources :categories, except: [ :show ]
-  resources :category_groups, except: [ :show ]
+  resources :category_groups, except: [ :index, :show ]
   resources :accounts, except: [ :show ]
   resources :transactions, except: [ :show ]
   # resources :budgets, only: [ :index ]

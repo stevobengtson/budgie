@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_20_060630) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_27_031205) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.integer "account_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "budget", default: true
+    t.boolean "credit", default: false
   end
 
   create_table "budget_categories", force: :cascade do |t|

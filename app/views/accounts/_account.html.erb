@@ -1,4 +1,4 @@
-<div id="<%= dom_id account %>" class="grid grid-cols-4 tgrid-row">
+<div id="<%= dom_id account %>" class="grid grid-cols-5 tgrid-row">
   <div>
     <%= account.name %>
   </div>
@@ -7,6 +7,9 @@
   </div>
   <div>
     <%= account.budget ? "Yes" : "No" %>
+  </div>
+  <div>
+    <%= account.credit ? "Yes" : "No" %>
   </div>
   <div class="tgrid-row-actions">
     <%= edit_button edit_account_path(account) %>

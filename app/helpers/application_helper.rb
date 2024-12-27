@@ -30,7 +30,7 @@ module ApplicationHelper
   end
 
   def delete_button(path, label = "Delete")
-    button_to path, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn-danger inline-flex items-center" do
+    button_to path, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn-danger inline-flex items-center", method: :delete do
       concat(svg_icon("delete", "mr-2"))
       concat(content_tag(:span, label))
     end

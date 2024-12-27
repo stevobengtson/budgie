@@ -18,7 +18,7 @@ class SetupService
   end
 
   def create_category_groups
-    CategoryGroup.create!(name: "Income") # This is a special one for income categories, it should not be deleted
+    CategoryGroup.create!(name: "Income", is_income: true)
     CategoryGroup.create!(name: "Debt")
     CategoryGroup.create!(name: "Home")
     CategoryGroup.create!(name: "Auto")

@@ -19,6 +19,7 @@ class CategoriesController < ApplicationController
   # POST /categories or /categories.json
   def create
     @category = Category.new(category_params)
+    @category.is_income = @category.category_group.is_income?
 
     respond_to do |format|
       if @category.save
@@ -33,6 +34,7 @@ class CategoriesController < ApplicationController
 
   # PATCH/PUT /categories/1 or /categories/1.json
   def update
+    @category.is_income = @category.category_group.is_income?
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to categories_path, notice: "Category was successfully updated." }

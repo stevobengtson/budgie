@@ -1,10 +1,5 @@
 class CategoryGroupsController < ApplicationController
-  before_action :set_category_group, only: %i[ show edit update destroy ]
-
-  # GET /category_groups or /category_groups.json
-  def index
-    @category_groups = CategoryGroup.all
-  end
+  before_action :set_category_group, only: %i[ edit update destroy ]
 
   # GET /category_groups/new
   def new
