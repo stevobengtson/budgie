@@ -1,32 +1,8 @@
-<div class="w-full">
-  <% content_for :title, "Accounts" %>
-
-  <div class="grid grid-cols-2 mb-4">
-    <div class="text-left text-2xl font-bold pl-2 pt-2">Accounts</div>
-    <div class="text-right pr-2 pt-2"><%= new_button new_account_path, "New" %></div>
-  </div>
-
-  <div id="accounts" class="tgrid-container">
-    <div class="grid grid-cols-5 tgrid-header">
-      <div>
-        <strong class="tgrid-header-column">Name</strong>
-      </div>
-      <div>
-        <strong class="tgrid-header-column">Type</strong>
-      </div>
-      <div>
-        <strong class="tgrid-header-column">Budget?</strong>
-      </div>
-      <div>
-        <strong class="tgrid-header-column">Credit?</strong>
-      </div>
-      <div>
-        <strong class="tgrid-header-column">Action</strong>
-      </div>
+<%= turbo_frame_tag "accounts_list" do %>
+  <div class="text-2xl pl-1">Accounts</div>
+  <% @accounts.each do |account| %>
+    <div class="pl-4 pb-2">
+      <%= link_to account.name, transactions_path(account_id: account.id), { data: { turbo_frame: 'main_container' } } %>
     </div>
-
-    <% @accounts.each do |account| %>
-      <%= render account %>
-    <% end %>
-  </div>
-</div>
+  <% end %>
+<% end %>
