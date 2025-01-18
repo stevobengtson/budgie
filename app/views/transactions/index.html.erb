@@ -1,59 +1,44 @@
-<%= turbo_frame_tag "main_container" do %>
-  <div class="w-full">
-    <% content_for :title, "Transactions" %>
+<div class="w-full p-4">
+  <% content_for :title, (@selected_account.present? ? @selected_account.name : "All") + " Transactions" %>
 
-    <div class="grid grid-cols-3 mb-4">
-      <div class="text-left text-2xl font-bold pl-2 pt-2">
-        Transactions
-      </div>
-      <div class="text-center pt-2">
-        <%= form_tag transactions_path, method: "get" do %>
-          <%= select nil, :account_id,
-                     [ [ "All", 0 ] ].concat(Account.all.collect { |a| [ a.name, a.id ] }),
-                     {
-                       include_blank: false,
-                       prompt: "Select Account",
-                       selected: @selected_account_id,
-                     },
-                     {
-                       class: "w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500",
-                       onchange: "this.form.submit();",
-                     } %>
-        <% end %>
-      </div>
-      <div class="text-right pr-2 pt-2">
-        <%= new_button new_transaction_path %>
-      </div>
+  <div class="grid grid-cols-2 mb-4">
+    <div class="text-left text-2xl font-bold pl-2 pt-2">
+      <%= (@selected_account.present? ? @selected_account.name : "All") %> Transactions
     </div>
-
-    <div id="transactions" class="tgrid-container">
-      <div class="grid grid-cols-6 tgrid-header">
-        <div>
-          <strong class="tgrid-header-column">Account</strong>
-        </div>
-        <div>
-          <%= sortable "entry", "Entry", "tgrid-header-column" %>
-        </div>
-        <div>
-          <strong class="tgrid-header-column">Category</strong>
-        </div>
-        <div>
-          <strong class="tgrid-header-column">Description</strong>
-        </div>
-        <div>
-          <%= sortable "amount", "Amount", "tgrid-header-column" %>
-        </div>
-        <div>
-          <strong class="tgrid-header-column">Action</strong>
-        </div>
-      </div>
-      <% @transactions.each do |transaction| %>
-        <%= render transaction %>
-      <% end %>
-    </div>
-    <div class="grid grid-cols-2 mb-5">
-      <div class="text-start"><%== pagy_info(@pagy) %></div>
-      <div class="text-end justify-end mx-auto"><%== pagy_nav(@pagy) %></div>
+    <div class="text-right pr-2 pt-2">
+      <%= new_button new_transaction_path %>
     </div>
   </div>
-<% end %>
+
+  <div id="transactions" class="tgrid-container">
+    <div class="grid <%= @selected_account.blank? ? "grid-cols-6" : "grid-cols-5" %> tgrid-header">
+      <% if @selected_account.blank? %>
+      <div>
+        <strong class="tgrid-header-column">Account</strong>
+      </div>
+      <% end %>
+      <div>
+        <%= sortable "entry", "Entry", "tgrid-header-column" %>
+      </div>
+      <div>
+        <strong class="tgrid-header-column">Category</strong>
+      </div>
+      <div>
+        <strong class="tgrid-header-column">Description</strong>
+      </div>
+      <div>
+        <%= sortable "amount", "Amount", "tgrid-header-column" %>
+      </div>
+      <div>
+        <strong class="tgrid-header-column">Action</strong>
+      </div>
+    </div>
+    <% @transactions.each do |transaction| %>
+      <%= render transaction %>
+    <% end %>
+  </div>
+  <div class="mb-5 p-4 flex justify-between">
+    <div class="text-start"><%== pagy_info(@pagy) %></div>
+    <div class="text-end justify-end"><%== pagy_nav(@pagy) %></div>
+  </div>
+</div>

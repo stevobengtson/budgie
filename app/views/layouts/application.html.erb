@@ -27,11 +27,11 @@
 <%= turbo_frame_tag "modal" %>
 <%= render partial: "shared/notifications", locals: { message: flash[:notice] } %>
 <div class="flex flex-row h-full">
-  <div class="w-64 h-full flex-none bg-slate-200 dark:bg-slate-900 shadow-md hover:shadow-xl">
-    <%= turbo_frame_tag "accounts_list", src: accounts_path %>
+  <div class="w-64 h-full flex-none p-2">
+    <%= render partial: "accounts/sidebar" %>
   </div>
   <div class="grow">
-    <%= turbo_frame_tag "main_container", src: transactions_path %>
+    <%= yield %>
   </div>
 </div>
 </body>

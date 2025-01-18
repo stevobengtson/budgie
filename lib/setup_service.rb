@@ -14,7 +14,7 @@ class SetupService
   def create_accounts
     Account.create!(name: "Checking", account_type: :checking)
     Account.create!(name: "Savings", account_type: :savings)
-    Account.create!(name: "Credit Card", account_type: :credit_card)
+    Account.create!(name: "Credit Card", account_type: :credit_card, credit: true)
   end
 
   def create_category_groups

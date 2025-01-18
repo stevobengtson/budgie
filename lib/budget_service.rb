@@ -37,11 +37,11 @@ class BudgetService
 
   def calculate_spent_amount(budget, category)
     category.transactions
-            .where(
-              "strftime('%m', entry) = ? AND strftime('%Y', entry) = ?",
-              format("%02d", budget.month),
-              budget.year.to_s
-            )
-            .sum(:amount)
+                .where(
+                  "to_char(entry, 'MM') = ? AND to_char(entry, 'YYYY') = ?",
+                  format("%02d", budget.month),
+                  budget.year.to_s
+                )
+                .sum(:amount)
   end
 end

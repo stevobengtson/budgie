@@ -1,7 +1,9 @@
-<div id="<%= dom_id transaction %>" class="grid grid-cols-6 tgrid-row">
+<div id="<%= dom_id transaction %>" class="grid <%= @selected_account.blank? ? "grid-cols-6" : "grid-cols-5" %> tgrid-row">
+  <% if @selected_account.blank? %>
   <div>
     <%= transaction.account.name %>
   </div>
+  <% end %>
   <div>
     <%= transaction.entry.strftime("%b %d, %Y") %>
   </div>

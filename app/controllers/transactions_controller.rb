@@ -65,7 +65,7 @@ class TransactionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def transaction_params
-      params.expect(transaction: [ :entry, :description, :amount, :account_id ])
+      params.expect(transaction: [ :entry, :description, :amount, :account_id, :category_id ])
     end
 
     def sort_column

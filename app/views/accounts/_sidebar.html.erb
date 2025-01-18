@@ -1,0 +1,11 @@
+<div class="text-2xl pl-1">Accounts</div>
+<% item_class = "flex pl-4" + (@selected_account.blank? ? " bg-slate-400" : "") %>
+<div class="pb-2">
+  <%= link_to "All", transactions_path, { class: item_class } %>
+</div>
+<% @accounts.each do |account| %>
+  <% item_class = "flex pl-4" + (@selected_account == account ? " bg-slate-400" : "") %>
+  <div class="pb-2">
+    <%= link_to account.name, transactions_path(account_id: account.id), { class: item_class } %>
+  </div>
+<% end %>
