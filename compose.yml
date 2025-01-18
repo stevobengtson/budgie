@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: bengtson.ca/budgie
     restart: unless-stopped
     ports:
       - 9005:80
