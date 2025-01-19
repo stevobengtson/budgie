@@ -3,9 +3,6 @@ class Category < ApplicationRecord
   has_many :transactions
 
   def can_delete?
-    if category_group.is_income?
-      category_group.categories.count > 1
-    end
-    true
+    !category_group.is_income? || category_group.categories.count > 1
   end
 end

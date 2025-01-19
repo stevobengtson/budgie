@@ -23,16 +23,14 @@ module ApplicationHelper
   end
 
   def edit_button(path, label = "Edit")
-    link_to path, class: "btn-primary inline-flex items-center" do
-      concat(svg_icon("edit", "mr-2"))
-      concat(content_tag(:span, label))
+    link_to path do
+      concat(svg_icon("edit", "stroke-black fill-none"))
     end
   end
 
   def delete_button(path, label = "Delete")
-    button_to path, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, class: "btn-danger inline-flex items-center", method: :delete do
-      concat(svg_icon("delete", "mr-2"))
-      concat(content_tag(:span, label))
+    button_to path, data: { turbo_method: "delete", turbo_confirm: "Are you sure?" }, method: :delete do
+      concat(svg_icon("delete", "stroke-red-600 fill-none hover:stroke-red-700"))
     end
   end
 

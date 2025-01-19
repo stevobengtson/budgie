@@ -23,14 +23,14 @@
   <%= javascript_importmap_tags %>
 </head>
 
-<body class="text-slate-500 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 h-screen" data-controller="dark-mode">
+<body class="h-screen" data-controller="dark-mode">
 <%= turbo_frame_tag "modal" %>
 <%= render partial: "shared/notifications", locals: { message: flash[:notice] } %>
 <div class="flex flex-row h-full">
-  <div class="w-64 h-full flex-none p-2">
+  <div class="w-64 h-full flex-none p-2 bg-blue-700 text-white">
     <%= render partial: "accounts/sidebar" %>
   </div>
-  <div class="grow">
+  <div class="grow p-2">
     <%= yield %>
   </div>
 </div>

@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_27_031205) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_19_020606) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.integer "account_type"
@@ -18,15 +21,16 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_27_031205) do
     t.datetime "updated_at", null: false
     t.boolean "budget", default: true
     t.boolean "credit", default: false
+    t.decimal "balance", precision: 12, scale: 2, default: "0.0"
   end
 
   create_table "budget_categories", force: :cascade do |t|
     t.integer "budget_id", null: false
     t.integer "category_id", null: false
-    t.decimal "starting_amount"
-    t.decimal "assigned_amount"
-    t.decimal "required_amount"
-    t.decimal "spent_amount"
+    t.decimal "starting_amount", precision: 12, scale: 2, default: "0.0"
+    t.decimal "assigned_amount", precision: 12, scale: 2, default: "0.0"
+    t.decimal "required_amount", precision: 12, scale: 2, default: "0.0"
+    t.decimal "spent_amount", precision: 12, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["budget_id"], name: "index_budget_categories_on_budget_id"
@@ -36,8 +40,8 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_27_031205) do
   create_table "budgets", force: :cascade do |t|
     t.integer "month"
     t.integer "year"
-    t.decimal "income"
-    t.decimal "assigned"
+    t.decimal "income", precision: 12, scale: 2, default: "0.0"
+    t.decimal "assigned", precision: 12, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -61,7 +65,7 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_27_031205) do
   create_table "transactions", force: :cascade do |t|
     t.date "entry"
     t.text "description"
-    t.decimal "amount"
+    t.decimal "amount", precision: 12, scale: 2, default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "account_id"
