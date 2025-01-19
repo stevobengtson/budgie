@@ -1,6 +1,6 @@
-<% item_class = "flex text-2xl p-1" + (@selected_account.blank? ? " bg-emerald-300 text-black rounded" : "") %>
+<% item_class = "flex text-2xl p-1" + (@all_accounts ? " bg-emerald-300 text-black rounded" : "") %>
 <div>
-  <%= link_to "All Accounts", transactions_path, { class: item_class } %>
+  <%= link_to "All Accounts", transactions_path(account_id: 'all'), { class: item_class } %>
 </div>
 <% @accounts.each do |account| %>
   <% item_class = "flex pl-4 justify-between" + (@selected_account == account ? " bg-emerald-300 text-black rounded" : "") %>

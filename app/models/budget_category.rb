@@ -9,4 +9,9 @@ class BudgetCategory < ApplicationRecord
   def remaining_amount
     starting_amount + assigned_amount - spent_amount
   end
+
+  def update_category(category)
+    self.spent_amount = category.sum_transactions_for_budget(budget)
+    save!
+  end
 end

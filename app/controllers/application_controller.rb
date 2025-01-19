@@ -14,7 +14,8 @@ class ApplicationController < ActionController::Base
   end
 
   def selected_account
-    @selected_account = Account.find_by(id: params[:account_id])
+    @all_accounts = true if params[:account_id] == "all"
+    @selected_account = Account.find_by(id: params[:account_id]) if params[:account_id] && params[:account_id] != "all"
   end
 
   def select_layout

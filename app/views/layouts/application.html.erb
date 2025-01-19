@@ -6,6 +6,7 @@
   <%= render partial: "shared/notifications", locals: { message: flash[:notice] } %>
   <div class="flex flex-row h-full bg-emerald-100">
     <div class="w-64 h-full flex-none p-2 bg-emerald-950 text-white">
+      <%= link_to 'Budget', budgets_path, class: "flex text-2xl p-1" + (request.path.start_with?('/budgets') ? " bg-emerald-300 text-black rounded" : "") %>
       <%= render partial: "accounts/sidebar" %>
       <%= render partial: "shared/user_account" %>
     </div>
