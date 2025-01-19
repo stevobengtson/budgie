@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: ./Dockerfile
     restart: unless-stopped
+    env_file: .env
     ports:
       - 9005:80
     depends_on:
