@@ -1,4 +1,5 @@
 class CategoryGroupsController < ApplicationController
+  before_action :resume_session
   before_action :set_category_group, only: %i[ edit update destroy ]
 
   # GET /category_groups/new

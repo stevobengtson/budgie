@@ -1,4 +1,5 @@
 class AccountsController < ApplicationController
+  before_action :resume_session
   before_action :set_account, only: %i[ edit update destroy ]
 
   # GET /accounts or /accounts.json

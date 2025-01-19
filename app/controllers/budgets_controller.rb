@@ -1,4 +1,5 @@
 class BudgetsController < ApplicationController
+  before_action :resume_session
   before_action :get_dates, only: [ :index ]
 
   # GET /budgets or /budgets.json

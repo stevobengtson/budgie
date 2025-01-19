@@ -1,4 +1,5 @@
 class TransactionsController < ApplicationController
+  before_action :resume_session
   before_action :set_transaction, only: %i[ edit update destroy ]
   helper_method :sort_column, :sort_direction
 

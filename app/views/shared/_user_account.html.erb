@@ -1,0 +1,6 @@
+<% if Current.user.present? %>
+<div>
+    <p><%= Current.user.email_address %></p>
+    <%= button_to 'Sign out', session_path, method: :delete %>
+</div>
+<% end %>

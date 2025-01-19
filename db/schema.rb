@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_19_020606) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_19_070241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,6 +22,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_020606) do
     t.boolean "budget", default: true
     t.boolean "credit", default: false
     t.decimal "balance", precision: 12, scale: 2, default: "0.0"
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
   create_table "budget_categories", force: :cascade do |t|
@@ -62,6 +64,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_020606) do
     t.boolean "is_income", default: false, null: false
   end
 
+  create_table "sessions", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "ip_address"
+    t.string "user_agent"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_sessions_on_user_id"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.date "entry"
     t.text "description"
@@ -74,9 +85,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_19_020606) do
     t.index ["category_id"], name: "index_transactions_on_category_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "email_address", null: false
+    t.string "password_digest", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+  end
+
+  add_foreign_key "accounts", "users"
   add_foreign_key "budget_categories", "budgets"
   add_foreign_key "budget_categories", "categories"
   add_foreign_key "categories", "category_groups"
+  add_foreign_key "sessions", "users"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "categories"
 end

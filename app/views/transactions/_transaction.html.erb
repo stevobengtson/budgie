@@ -13,7 +13,7 @@
   <div class="text-left">
     <%= transaction.description %>
   </div>
-  <div>
+  <div class="<%= transaction.amount < 0 ? 'text-red-600' : 'text-green-600' %>">
     <%= number_to_currency(transaction.amount) %>
   </div>
   <div class="tgrid-row-actions">

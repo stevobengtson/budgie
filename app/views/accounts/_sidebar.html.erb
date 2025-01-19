@@ -1,14 +1,16 @@
-<% item_class = "flex text-2xl p-1" + (@selected_account.blank? ? " bg-blue-500 rounded" : "") %>
+<% item_class = "flex text-2xl p-1" + (@selected_account.blank? ? " bg-emerald-300 text-black rounded" : "") %>
 <div>
   <%= link_to "All Accounts", transactions_path, { class: item_class } %>
 </div>
 <% @accounts.each do |account| %>
-  <% item_class = "flex pl-4" + (@selected_account == account ? " bg-blue-500 rounded" : "") %>
+  <% item_class = "flex pl-4 justify-between" + (@selected_account == account ? " bg-emerald-300 text-black rounded" : "") %>
   <div class="pb-2">
-    <%= link_to account.name, transactions_path(account_id: account.id), { class: item_class } %>
-    <%= number_to_currency account.balance %>
+    <%= link_to transactions_path(account_id: account.id), { class: item_class } do %>
+      <span><%= account.name %></span>
+      <span><%= number_to_currency account.balance %></span>
+    <% end %>
   </div>
 <% end %>
 <div class="flex justify-end">
-  <%= link_to 'Add account', new_account_path, class: "text-right bg-transparent text-xs m-1 p-1 text-white rounded-lg bg-blue-500 hover:bg-blue-800" %>
+  <%= link_to 'Add account', new_account_path, class: "font-medium text-right bg-transparent text-xs m-1 py-1 px-2 rounded-lg bg-emerald-500 hover:bg-emerald-800" %>
 </div>

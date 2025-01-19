@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
+<%= render partial: "layouts/head" %>
+<body class="h-screen" data-controller="dark-mode">
+    <%= render partial: "shared/notifications", locals: { message: flash[:notice] } %>
+    <%= render partial: "shared/notifications", locals: { message: flash[:error] } %>
+    <%= yield %>
+</body>
+</html>
