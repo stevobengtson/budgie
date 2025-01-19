@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
   include Pagy::Backend
-  before_action :load_accounts
-  before_action :selected_account
+  before_action :load_accounts, if: :authenticated?
+  before_action :selected_account, if: :authenticated?
   layout :select_layout
 
   private
