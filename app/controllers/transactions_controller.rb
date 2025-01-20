@@ -22,10 +22,10 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = TransactionService.create_transaction(transaction_params[:transaction])
 
     respond_to do |format|
-      if @transaction.save
+      if @transaction
         format.html { redirect_to transactions_path, notice: "Transaction was successfully created." }
         format.json { render :show, status: :created, location: @transaction }
       else
